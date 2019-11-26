@@ -7,7 +7,7 @@ import styles from './manager.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const WindowManager = ({ background, windows, desktopItems, taskbarItems }) => (
+export const WindowManager = ({ background, windows, desktopItems, taskbarItems }) => (
   <div className={cx('window-manager')}>
     <div className={cx('window-manager_layer-group')}>
       <div className={cx('window-manager_layer')}>
@@ -22,5 +22,3 @@ const WindowManager = ({ background, windows, desktopItems, taskbarItems }) => (
     <Taskbar>{taskbarItems}</Taskbar>
   </div>
 )
-
-export default WindowManager

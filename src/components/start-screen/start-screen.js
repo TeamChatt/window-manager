@@ -5,7 +5,7 @@ import styles from './start-screen.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const StartScreen = ({ children }) => (
+export const StartScreen = ({ children }) => (
   <div className={cx('start-screen')}>
     <div className={cx('start-screen_inner')}>
       <div className={cx('start-screen_contents')}>
@@ -16,4 +16,3 @@ const StartScreen = ({ children }) => (
     </div>
   </div>
 )
-export default StartScreen

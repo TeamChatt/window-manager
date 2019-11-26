@@ -1,2 +1,2 @@
-export { default as Taskbar } from './taskbar'
-export { default as TaskbarButton } from './taskbar-button'
+export { Taskbar } from './taskbar'
+export { TaskbarButton } from './taskbar-button'

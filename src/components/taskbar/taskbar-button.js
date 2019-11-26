@@ -5,7 +5,7 @@ import styles from './taskbar-button.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const TaskbarButton = ({
+export const TaskbarButton = ({
   name,
   borderless,
   children,
@@ -51,4 +51,3 @@ TaskbarButton.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
 }
-export default TaskbarButton

@@ -1,2 +1,2 @@
-export { default as WindowManager } from './manager'
-export { default as WindowManagerFrame } from './frame'
+export { WindowManager } from './manager'
+export { WindowManagerFrame } from './frame'

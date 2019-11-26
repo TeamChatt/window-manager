@@ -1,11 +1,11 @@
 import React from 'react'
 
-import styles from './taskbar.scss'
+import styles from './file-grid.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-export const Taskbar = ({ children }) => (
-  <div className={cx('taskbar')}>
+export const FileGrid = ({ children }) => (
+  <div className={cx('file-grid')}>
     {children}
   </div>
 )

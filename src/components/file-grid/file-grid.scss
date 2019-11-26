@@ -1,0 +1,14 @@
+@import '#style/index';
+@import '#themes/oldschool/theme';
+
+$item-size: 72px;
+
+.file-grid {
+  flex: 1;
+  padding: $space-inset-l;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, $item-size);
+  grid-template-columns: repeat(auto-fill, $item-size);
+  grid-gap: $space-l;
+}

@@ -5,7 +5,7 @@ import styles from './start-screen-item.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const StartScreenItem = ({ icon, title, subtitle, onClick }) => {
+export const StartScreenItem = ({ icon, title, subtitle, onClick }) => {
   const ref = useRef()
   const { onKeyDown, isFocused, onFocus, onBlur } = useListFocus(ref)
   const className = cx('start-screen-item', {
@@ -29,4 +29,3 @@ const StartScreenItem = ({ icon, title, subtitle, onClick }) => {
     </button>
   )
 }
-export default StartScreenItem

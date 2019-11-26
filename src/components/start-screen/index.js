@@ -1,2 +1,2 @@
-export { default as StartScreen } from './start-screen'
-export { default as StartScreenItem } from './start-screen-item'
+export { StartScreen } from './start-screen'
+export { StartScreenItem } from './start-screen-item'

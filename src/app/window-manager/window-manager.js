@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Window from '/components/window'
-import { DesktopItem } from '/components/desktop'
+import { Window } from '/components/window'
+import { FileGridItem } from '/components/file-grid'
 import { WindowManager, WindowManagerFrame } from '/components/window-manager'
 import { TaskbarButton } from '/components/taskbar'
 import { IconPause } from '/components/icon'
@@ -14,16 +14,16 @@ const WindowManagerApp = () => {
   const windows = (
     <>
       <WindowManagerFrame>
-        <Window />
+        <Window title="Chat" />
       </WindowManagerFrame>
     </>
   )
   const desktopItems = (
     <>
-      <DesktopItem icon={folder} label="Recycle Bin"/>
-      <DesktopItem icon={folder} label="Pictures"/>
-      <DesktopItem icon={folder} label="Music"/>
-      <DesktopItem icon={folder} label="Documents"/>
+      <FileGridItem icon={folder} label="Recycle Bin"/>
+      <FileGridItem icon={folder} label="Pictures"/>
+      <FileGridItem icon={folder} label="Music"/>
+      <FileGridItem icon={folder} label="Documents"/>
     </>
   )
   const taskbarItems = (

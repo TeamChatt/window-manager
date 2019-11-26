@@ -4,7 +4,7 @@ import styles from './index.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const Window = ({ title, children }) => (
+export const Window = ({ title, children }) => (
   <div className={cx('window')}>
     <div className={cx('window_header')}>
       {title}
@@ -14,5 +14,3 @@ const Window = ({ title, children }) => (
     </div>
   </div>
 )
-
-export default Window
