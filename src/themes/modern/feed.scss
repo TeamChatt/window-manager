@@ -1,0 +1,6 @@
+@import '~style/index';
+@import '../base/feed';
+
+.feed {
+  @include scrollable();
+}

@@ -1,0 +1,39 @@
+@import '~style/index';
+@import '~themes/oldschool/theme';
+
+.window {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  border: $os-border-style-window;
+  border-top-right-radius: $border-radius-m;
+  border-top-left-radius: $border-radius-m;
+
+  background-color: $os-color-warm-gray-0;
+}
+
+
+.window_header {
+  color: $color--text-inverse;
+  padding: $space-inset-stretch-m;
+  text-shadow: 0 1px transparentize($color-black, 0.5);
+
+  background: linear-gradient(
+    to bottom,
+    $color-blue-3 0%,
+    $color-blue-6 10%,
+    $color-blue-5 30%,
+    $color-blue-5 80%,
+    $color-blue-7 100%
+  );
+
+  border-top-right-radius: $border-radius-m - 2px;
+  border-top-left-radius: $border-radius-m - 2px;
+}
+
+.window_body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}

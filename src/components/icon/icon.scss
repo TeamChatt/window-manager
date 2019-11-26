@@ -1,0 +1,11 @@
+@import '~style/index';
+
+.icon {
+  display: inline-flex;
+}
+.icon--white {
+  fill: $color-white;
+}
+.icon--black {
+  fill: $color-black;
+}

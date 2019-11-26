@@ -1,0 +1,14 @@
+@import '~style/index';
+@import '../base/avatar';
+
+$avatar_background-color: $color-red-8;
+
+.avatar {
+  background-color: $avatar_background-color;
+}
+.avatar--m {
+  border-radius: $avatar--m_size;
+}
+.avatar--s {
+  border-radius: $avatar--s_size;
+}

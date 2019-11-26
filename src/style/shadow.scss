@@ -1,0 +1,9 @@
+@import "./color";
+
+$color--shadow: transparentize($color-black, 0.5);
+
+$shadow-s: 0 2px 4px $color--shadow;
+$shadow-m: 0 4px 8px $color--shadow;
+
+$shadow-inset-s: inset 0 2px 4px $color--shadow;
+$shadow-inset-m: inset 0 4px 8px $color--shadow;

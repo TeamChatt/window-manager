@@ -1,0 +1,10 @@
+@import '~style/index';
+@import '../base/form';
+
+.form {
+  border: $border-style-standard;
+  border-radius: $border-radius-s;
+}
+.form--focused {
+  border: $border-style-dark;
+}

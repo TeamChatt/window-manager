@@ -1,0 +1,28 @@
+@import "./color";
+
+$color--scrollbar-track: $color-gray-2;
+$color--scrollbar-thumb: $color-gray-7;
+$scrollbar-size: 8px;
+
+@mixin scrollable {
+  &::-webkit-scrollbar {
+    width: $scrollbar-size;
+    height: $scrollbar-size;
+  }
+  &::-webkit-scrollbar-track {
+    border-right: none;
+    background: $color--scrollbar-track;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: $scrollbar-size;
+    border-right: none;
+  }
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-scrollbar-thumb:hover,
+  &::-webkit-scrollbar-thumb:active {
+    background-color: $color--scrollbar-thumb;
+  }
+  &::-webkit-scrollbar-corner {
+    background: $color--scrollbar-track;
+  }
+}

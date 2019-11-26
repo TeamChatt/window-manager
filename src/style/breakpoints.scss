@@ -1,0 +1,25 @@
+$breakpoint-s:  576px;
+$breakpoint-m:  768px;
+$breakpoint-l:  992px;
+$breakpoint-xl: 1200px;
+
+@mixin media-breakpoint-s() {
+  @media (min-width: $breakpoint-s) {
+    @content;
+  }
+}
+@mixin media-breakpoint-m() {
+  @media (min-width: $breakpoint-m) {
+    @content;
+  }
+}
+@mixin media-breakpoint-l() {
+  @media (min-width: $breakpoint-l) {
+    @content;
+  }
+}
+@mixin media-breakpoint-xl() {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}

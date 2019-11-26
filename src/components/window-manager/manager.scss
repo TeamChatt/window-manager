@@ -1,0 +1,8 @@
+@import '~style/index';
+
+.window-manager {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100vh;
+  overflow: hidden;
+}

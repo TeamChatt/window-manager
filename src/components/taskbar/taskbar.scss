@@ -1,0 +1,21 @@
+@import '~style/index';
+@import '~themes/oldschool/theme';
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: $space-inset-stretch-s;
+  height: 42px;
+
+  border: $os-border-style-window;
+  background: linear-gradient(
+    to bottom,
+    $color-blue-3 0%,
+    $color-blue-6 10%,
+    $color-blue-5 30%,
+    $color-blue-5 80%,
+    $color-blue-7 100%
+  );
+}

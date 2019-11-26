@@ -1,0 +1,61 @@
+@import '~style/index';
+@import '~themes/oldschool/theme';
+
+$border-style-button:         2px outset $color-blue-4;
+$border-style-button--active: 2px inset $color-blue-4;
+$box-shadow-focus: 0 0 0 2px $color-orange-4;
+
+$gradient: linear-gradient(
+  to bottom,
+  $color-blue-2 0%,
+  $color-blue-5 10%,
+  $color-blue-4 30%,
+  $color-blue-4 80%,
+  $color-blue-6 100%
+);
+$gradient-reverse: linear-gradient(
+  to top,
+  $color-blue-2 0%,
+  $color-blue-5 10%,
+  $color-blue-4 30%,
+  $color-blue-4 80%,
+  $color-blue-6 100%
+);
+
+.taskbar-button {
+  margin: 0;
+  padding: $space-inset-stretch-s;
+  border: $border-style-button;
+  border-radius: $border-radius-m;
+  background: $gradient;
+
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: $color--text-inverse;
+  text-shadow: 0 1px transparentize($color-black, 0.5);
+
+  svg {
+    margin: -6px;
+  }
+}
+
+.taskbar-button--borderless {
+  border: 2px solid transparent;
+  background: none;
+}
+
+.taskbar-button:focus {
+  outline: 0;
+  box-shadow: $box-shadow-focus;
+}
+
+.taskbar-button:active:not([disabled]) {
+  border: $border-style-button--active;
+  background: $gradient-reverse;
+}
+
+.taskbar-button[disabled] {
+  opacity: 0.25;
+  cursor: default;
+}

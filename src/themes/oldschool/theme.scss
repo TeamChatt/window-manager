@@ -1,0 +1,59 @@
+// Colors
+$os-color-warm-gray-0: #f5eee5;
+$os-color-dark-blue-0: #1e00ff;
+
+$os-color--border-standard: $color-indigo-2;
+$os-color--border-window:   $color-blue-5;
+
+// Borders
+$os-border-style-standard: 1px solid  $os-color--border-standard;
+$os-border-style-window:   2px outset $os-color--border-window;
+
+$os-border-radius-l:  12px;
+
+// Shadows
+$os-shadow-l: 0 8px 24px $color--shadow;
+
+// Sizes
+$os-space-inset-squash-xs: 6px 3px;
+
+@mixin os-scrollable() {
+  $color--scrollbar-track: $color-white;
+  $color--scrollbar-thumb: $color-indigo-1;
+  $color--scrollbar-border: $color-indigo-2;
+  $color--scrollbar-thumb_active: $color-indigo-2;
+  $scrollbar-size: 18px;
+
+  &::-webkit-scrollbar {
+    width: $scrollbar-size;
+    height: $scrollbar-size;
+  }
+  &::-webkit-scrollbar-track {
+    border: 1px solid $color-gray-2;
+    background: $color--scrollbar-track;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color--scrollbar-thumb;
+    border: 1px solid $color--scrollbar-border;
+    border-radius: $border-radius-s;
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background-color: $color--scrollbar-thumb_active;
+  }
+  &::-webkit-scrollbar-corner {
+    background: $color--scrollbar-track;
+  }
+  &::-webkit-scrollbar-button:start:decrement,
+  &::-webkit-scrollbar-button:end:increment {
+    display: block;
+    background-color: $color--scrollbar-thumb;
+    border: 1px solid $color--scrollbar-border;
+    border-radius: $border-radius-s;
+  }
+  &::-webkit-scrollbar-button:vertical:increment {
+
+  }
+  &::-webkit-scrollbar-button:vertical:decrement {
+
+  }
+}

@@ -1,0 +1,123 @@
+@import '../../node_modules/open-color/open-color';
+
+$color-gray-0:    $oc-gray-0;
+$color-gray-1:    $oc-gray-1;
+$color-gray-2:    $oc-gray-2;
+$color-gray-3:    $oc-gray-3;
+$color-gray-4:    $oc-gray-4;
+$color-gray-5:    $oc-gray-5;
+$color-gray-6:    $oc-gray-6;
+$color-gray-7:    $oc-gray-7;
+$color-gray-8:    $oc-gray-8;
+$color-gray-9:    $oc-gray-9;
+
+$color-red-0:    $oc-red-0;
+$color-red-1:    $oc-red-1;
+$color-red-2:    $oc-red-2;
+$color-red-3:    $oc-red-3;
+$color-red-4:    $oc-red-4;
+$color-red-5:    $oc-red-5;
+$color-red-6:    $oc-red-6;
+$color-red-7:    $oc-red-7;
+$color-red-8:    $oc-red-8;
+$color-red-9:    $oc-red-9;
+
+$color-orange-0:    $oc-orange-0;
+$color-orange-1:    $oc-orange-1;
+$color-orange-2:    $oc-orange-2;
+$color-orange-3:    $oc-orange-3;
+$color-orange-4:    $oc-orange-4;
+$color-orange-5:    $oc-orange-5;
+$color-orange-6:    $oc-orange-6;
+$color-orange-7:    $oc-orange-7;
+$color-orange-8:    $oc-orange-8;
+$color-orange-9:    $oc-orange-9;
+
+$color-yellow-0:    $oc-yellow-0;
+$color-yellow-1:    $oc-yellow-1;
+$color-yellow-2:    $oc-yellow-2;
+$color-yellow-3:    $oc-yellow-3;
+$color-yellow-4:    $oc-yellow-4;
+$color-yellow-5:    $oc-yellow-5;
+$color-yellow-6:    $oc-yellow-6;
+$color-yellow-7:    $oc-yellow-7;
+$color-yellow-8:    $oc-yellow-8;
+$color-yellow-9:    $oc-yellow-9;
+
+$color-lime-0:    $oc-lime-0;
+$color-lime-1:    $oc-lime-1;
+$color-lime-2:    $oc-lime-2;
+$color-lime-3:    $oc-lime-3;
+$color-lime-4:    $oc-lime-4;
+$color-lime-5:    $oc-lime-5;
+$color-lime-6:    $oc-lime-6;
+$color-lime-7:    $oc-lime-7;
+$color-lime-8:    $oc-lime-8;
+$color-lime-9:    $oc-lime-9;
+
+$color-green-0:    $oc-green-0;
+$color-green-1:    $oc-green-1;
+$color-green-2:    $oc-green-2;
+$color-green-3:    $oc-green-3;
+$color-green-4:    $oc-green-4;
+$color-green-5:    $oc-green-5;
+$color-green-6:    $oc-green-6;
+$color-green-7:    $oc-green-7;
+$color-green-8:    $oc-green-8;
+$color-green-9:    $oc-green-9;
+
+$color-teal-0:    $oc-teal-0;
+$color-teal-1:    $oc-teal-1;
+$color-teal-2:    $oc-teal-2;
+$color-teal-3:    $oc-teal-3;
+$color-teal-4:    $oc-teal-4;
+$color-teal-5:    $oc-teal-5;
+$color-teal-6:    $oc-teal-6;
+$color-teal-7:    $oc-teal-7;
+$color-teal-8:    $oc-teal-8;
+$color-teal-9:    $oc-teal-9;
+
+$color-blue-0:    $oc-blue-0;
+$color-blue-1:    $oc-blue-1;
+$color-blue-2:    $oc-blue-2;
+$color-blue-3:    $oc-blue-3;
+$color-blue-4:    $oc-blue-4;
+$color-blue-5:    $oc-blue-5;
+$color-blue-6:    $oc-blue-6;
+$color-blue-7:    $oc-blue-7;
+$color-blue-8:    $oc-blue-8;
+$color-blue-9:    $oc-blue-9;
+
+$color-indigo-0:    $oc-indigo-0;
+$color-indigo-1:    $oc-indigo-1;
+$color-indigo-2:    $oc-indigo-2;
+$color-indigo-3:    $oc-indigo-3;
+$color-indigo-4:    $oc-indigo-4;
+$color-indigo-5:    $oc-indigo-5;
+$color-indigo-6:    $oc-indigo-6;
+$color-indigo-7:    $oc-indigo-7;
+$color-indigo-8:    $oc-indigo-8;
+$color-indigo-9:    $oc-indigo-9;
+
+$color-violet-0:    $oc-violet-0;
+$color-violet-1:    $oc-violet-1;
+$color-violet-2:    $oc-violet-2;
+$color-violet-3:    $oc-violet-3;
+$color-violet-4:    $oc-violet-4;
+$color-violet-5:    $oc-violet-5;
+$color-violet-6:    $oc-violet-6;
+$color-violet-7:    $oc-violet-7;
+$color-violet-8:    $oc-violet-8;
+$color-violet-9:    $oc-violet-9;
+
+$color-white:     #ffffff;
+$color-black:     $color-gray-9;
+$color-red:       $color-red-5;
+$color-orange:    $color-orange-5;
+$color-yellow:    $color-yellow-5;
+$color-green:     $color-green-5;
+$color-lime:      $color-lime-5;
+$color-teal:      $color-teal-5;
+$color-blue:      $color-blue-5;
+$color-indigo:    $color-indigo-5;
+$color-violet:    $color-violet-5;

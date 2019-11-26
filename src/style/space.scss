@@ -1,0 +1,37 @@
+$u1: 6px;
+$u2: 2*$u1;
+$u3: 3*$u1;
+$u4: 4*$u1;
+$u8: 8*$u1;
+
+$space-xs:              $u1;
+$space-s:               $u2;
+$space-m:               $u3;
+$space-l:               $u4;
+$space-xl:              $u8;
+
+$space-inset-xs:        $u1 $u1 $u1 $u1;
+$space-inset-s:         $u2 $u2 $u2 $u2;
+$space-inset-m:         $u3 $u3 $u3 $u3;
+$space-inset-l:         $u4 $u4 $u4 $u4;
+$space-inset-xl:        $u8 $u8 $u8 $u8;
+
+$space-stack-xs:        0 0 $u1 0;
+$space-stack-s:         0 0 $u2 0;
+$space-stack-m:         0 0 $u3 0;
+$space-stack-l:         0 0 $u4 0;
+$space-stack-xl:        0 0 $u8 0;
+
+$space-inline-xs:       0 $u1 0 0;
+$space-inline-s:        0 $u2 0 0;
+$space-inline-m:        0 $u3 0 0;
+$space-inline-l:        0 $u4 0 0;
+$space-inline-xl:       0 $u8 0 0;
+
+$space-inset-squish-s:  $u2 $u1;
+$space-inset-squish-m:  $u3 $u2;
+$space-inset-squish-l:  $u4 $u3;
+
+$space-inset-stretch-s: $u1 $u2;
+$space-inset-stretch-m: $u2 $u3;
+$space-inset-stretch-l: $u3 $u4;

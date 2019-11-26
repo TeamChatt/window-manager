@@ -1,0 +1,52 @@
+@import '~style/index';
+@import '~themes/oldschool/theme';
+
+$avatar_size: 64px;
+
+.start-screen-item {
+  border: 2px solid transparent;
+  border-radius: $border-radius-m;
+  margin: 0;
+  padding: $space-inset-s;
+  background: none;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+.start-screen-item--focused {
+  background: $color-blue-8;
+  border: 2px solid $color-orange-4;
+  outline: 0;
+}
+
+.start-screen-item_layout {
+  display: grid;
+  grid-template-columns: $avatar-size 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "icon title" "icon subtitle";
+  grid-column-gap: $space-s;
+}
+
+.start-screen-item_icon {
+  grid-area: icon;
+  border-radius: $border-radius-s;
+  border: 2px solid $color-white;
+  background: $color-gray-4;
+  box-shadow: $shadow-s;
+  width: 100%;
+}
+
+.start-screen-item_title {
+  grid-area: title;
+  color: $color--text-inverse;
+  font-size: $font-size-l;
+}
+
+.start-screen-item_subtitle {
+  grid-area: subtitle;
+  color: $color--text-standard;
+
+  .start-screen-item--focused & {
+    color: $color--text-inverse;
+  }
+}

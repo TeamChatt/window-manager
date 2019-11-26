@@ -1,0 +1,12 @@
+@import "./color";
+
+$border-radius-xs: 2px;
+$border-radius-s:  3px;
+$border-radius-m:  6px;
+
+$color--border-light:    $color-gray-2;
+$color--border-standard: $color-gray-4;
+$color--border-dark:     $color-gray-6;
+
+$border-style-standard:  1px solid $color--border-standard;
+$border-style-dark:      1px solid $color--border-dark;

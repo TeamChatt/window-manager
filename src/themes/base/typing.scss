@@ -1,0 +1,9 @@
+@import '~style/index';
+
+.typing {}
+.typing_message {
+  white-space: pre-wrap;
+}
+.typing_cursor {
+  border-left: 1px solid $color--border-dark;
+}

@@ -1,0 +1,58 @@
+@import '~style/index';
+
+$avatar_color:            $color--text-inverse;
+$avatar--l_size:          64px;
+$avatar--m_size:          40px;
+$avatar--s_size:          18px;
+
+.avatar {
+  border: $border-style-standard;
+
+  color: $avatar_color;
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+.avatar--single-letter {
+  font-size: $font-size-m;
+}
+
+.avatar--double-letter {
+  font-size: $font-size-s;
+}
+
+.avatar--l {
+  width: $avatar--l_size;
+  height: $avatar--l_size;
+  line-height: $avatar--l_size - 2px;
+}
+.avatar--l {
+  border-radius: $border-radius-s;
+}
+
+.avatar--m {
+  width: $avatar--m_size;
+  height: $avatar--m_size;
+  line-height: $avatar--m_size - 2px;
+}
+.avatar--m {
+  border-radius: $border-radius-s;
+}
+
+.avatar--s {
+  width: $avatar--s_size;
+  height: $avatar--s_size;
+
+  font-size: $font-size-xs;
+  line-height: $avatar--s_size - 2px;
+}
+.avatar--s {
+  border-radius: $border-radius-xs;
+}
+
+.avatar_image {
+  background-color: $color-white;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,45 @@
+@import '~style/index';
+
+// Message
+.message {
+  display: inline-flex;
+
+  > em,
+  > strong {
+    display: contents;
+  }
+}
+
+// Message Group
+.message-group {
+  display: flex;
+}
+.message-group--left {
+  flex-direction: row;
+  text-align: left;
+}
+.message-group--right {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.message-group_avatar {
+  align-self: flex-start;
+}
+.message-group--left .message-group_avatar {
+  margin-right: $space-xs;
+}
+.message-group--right .message-group_avatar {
+  margin-left: $space-xs;
+}
+
+.message-group_messages {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-bottom: - $space-xs;
+
+  > * {
+    padding: $space-stack-xs;
+  }
+}

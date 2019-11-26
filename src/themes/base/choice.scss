@@ -1,0 +1,32 @@
+@import '~style/index';
+
+$choice_color:         $color--text-light;
+$choice--active_color: $color-blue-8;
+
+.choices {
+  margin-bottom: -$space-xs;
+}
+
+.choice {
+  display: block;
+  background: none;
+  border: 0;
+  padding: 0;
+  outline: none;
+  text-align: left;
+  font-family: inherit;
+
+  cursor: pointer;
+  color: $choice_color;
+  margin: $space-stack-xs;
+}
+.choice:before {
+  content: '• ';
+}
+.choice:hover, .choice:focus, .choice:active {
+  color: $choice--active_color;
+  text-decoration: dotted underline;
+}
+.choice--focused {
+
+}

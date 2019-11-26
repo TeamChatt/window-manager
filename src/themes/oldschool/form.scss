@@ -1,0 +1,11 @@
+@import '~style/index';
+@import '../base/form';
+@import 'theme';
+
+.form {
+  border: $os-border-style-standard;
+  align-items: flex-start;
+}
+.form--focused {
+  border: $os-border-style-standard;
+}
