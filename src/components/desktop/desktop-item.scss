@@ -1,0 +1,28 @@
+@import '#style/index';
+@import '#themes/oldschool/theme';
+
+$item-size: 72px;
+$icon-size: 48px;
+
+.desktop-item {
+  display: grid;
+  width: $item-size;
+  height: $item-size;
+  grid-template-rows: $icon-size auto;
+  grid-gap: $space-xs;
+  
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.desktop-item_icon {
+  width: $icon-size;
+  height: $icon-size;
+}
+
+.desktop-item_label {
+  color: $color--text-inverse;
+  font-size: $font-size-s;
+  text-shadow: 0 1px transparentize($color-black, 0.5);
+}
