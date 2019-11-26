@@ -1,5 +1,5 @@
-@import '~style/index';
-@import '~themes/oldschool/theme';
+@import '#style/index';
+@import '#themes/oldschool/theme';
 
 $border-style-button:         2px outset $color-blue-4;
 $border-style-button--active: 2px inset $color-blue-4;
