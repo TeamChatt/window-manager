@@ -7,9 +7,9 @@ import styles from './manager.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const WindowManager = ({ desktopState, controls, children }) => (
+const WindowManager = ({ background, controls, children }) => (
   <div className={cx('window-manager')}>
-    <Desktop season={desktopState.season}>
+    <Desktop background={background}>
       {children}
     </Desktop>
     <Taskbar>{controls}</Taskbar>

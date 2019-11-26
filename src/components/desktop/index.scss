@@ -19,27 +19,6 @@
     right: 0;
     background-position: top center;
     background-size: cover;
-    transform: scale(1.05);
     transition: background 3s;
   }
-}
-
-.desktop--spring .desktop_background {
-  background-image: url('./d-n-angel.jpg');
-  filter: blur(2.5px) contrast(0.5);
-}
-
-.desktop--summer .desktop_background {
-  background-image: url('./revolutionary-girl-utena.jpg');
-  filter: blur(2.5px);
-}
-
-.desktop--fall .desktop_background {
-  background-image: url('./touhou-wings.jpg');
-  filter: blur(2.5px) brightness(1.2);
-}
-
-.desktop--winter .desktop_background {
-  background-image: url('./tsuzuki-snow.jpg');
-  filter: blur(2.5px);
 }

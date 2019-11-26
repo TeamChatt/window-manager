@@ -4,8 +4,10 @@ import Window from '/components/window'
 import { WindowManager, WindowManagerFrame } from '/components/window-manager'
 import { TaskbarButton } from '/components/taskbar'
 import { IconPause } from '/components/icon'
+import background from './touhou-wings.jpg'
 
-const ChatGame = () => {
+
+const WindowManagerApp = () => {
   const controls = (
     <>
       <TaskbarButton borderless name={'pause'} onClick={() => {}}>
@@ -16,7 +18,7 @@ const ChatGame = () => {
 
   return (
     <>
-      <WindowManager controls={controls} desktopState={{}}>
+      <WindowManager controls={controls} background={background}>
         <WindowManagerFrame>
           <Window />
         </WindowManagerFrame>
@@ -25,4 +27,4 @@ const ChatGame = () => {
   )
 }
 
-export default ChatGame
+export default WindowManagerApp
