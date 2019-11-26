@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { FileGrid } from '/components/file-grid'
 import { Desktop } from '/components/desktop'
 import { Taskbar } from '/components/taskbar'
 
@@ -12,7 +13,7 @@ export const WindowManager = ({ background, windows, desktopItems, taskbarItems 
     <div className={cx('window-manager_layer-group')}>
       <div className={cx('window-manager_layer')}>
         <Desktop background={background}>
-          {desktopItems}
+          <FileGrid>{desktopItems}</FileGrid>
         </Desktop>
       </div>
       <div className={cx('window-manager_layer')}>

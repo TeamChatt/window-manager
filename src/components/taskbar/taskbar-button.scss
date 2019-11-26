@@ -50,6 +50,7 @@ $gradient-reverse: linear-gradient(
   box-shadow: $box-shadow-focus;
 }
 
+.taskbar-button--active,
 .taskbar-button:active:not([disabled]) {
   border: $border-style-button--active;
   background: $gradient-reverse;

@@ -7,6 +7,7 @@ const cx = classnames.bind(styles)
 
 export const TaskbarButton = ({
   name,
+  active,
   borderless,
   children,
   disabled,
@@ -22,7 +23,8 @@ export const TaskbarButton = ({
   <button
     name={name}
     className={cx('taskbar-button', {
-      'taskbar-button--borderless': borderless
+      'taskbar-button--active': active,
+      'taskbar-button--borderless': borderless,
     })}
     disabled={disabled}
     onClick={onClick}
@@ -39,6 +41,7 @@ export const TaskbarButton = ({
 )
 TaskbarButton.propTypes = {
   name: PropTypes.string,
+  active: PropTypes.bool,
   borderless: PropTypes.bool,
   children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,

@@ -4,7 +4,7 @@
 .taskbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   padding: $space-inset-stretch-s;
   height: 42px;
