@@ -1,31 +1,55 @@
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { useRef, useState } from 'react'
+import { frame } from '/utils/frame'
 
-import styles from './outline.scss'
-import classnames from 'classnames/bind'
-const cx = classnames.bind(styles)
+import { Outline } from '/components/outline'
+import { useDeferredAnimation } from '/components/generic/animation'
 
-// eslint-disable-next-line react/display-name
-export const WindowManagerOutline = forwardRef(({ animate, rect }, ref) => {
-  const style = {
-    top:    rect.top,
-    left:   rect.left,
-    bottom: rect.bottom,
-    right:  rect.right,
-  }
-  const className = cx('window-manager-outline', {
-    'window-manager-outline--animate': animate,
-  })
-  return (
-    <div ref={ref} className={className} style={style} />
-  )
+const originRect = {
+  left: 0,
+  top: 0,
+  right: 0,
+  bottom: 0,
+}
+
+const flipRect = (from, to) => {
+  const fromRect = from.getBoundingClientRect()
+  const toRect   = to.getBoundingClientRect()
+  return flipPosition(fromRect, toRect)
+}
+const flipPosition = (from, to) => ({
+  top:      from.top    - to.top,
+  left:     from.left   - to.left,
+  bottom: -(from.bottom - to.bottom),
+  right:  -(from.right  - to.right),
 })
-WindowManagerOutline.propTypes = {
-  animate: PropTypes.bool,
-  rect: PropTypes.shape({
-    top:     PropTypes.number.isRequired,
-    left:    PropTypes.number.isRequired,
-    bottom:  PropTypes.number.isRequired,
-    right:   PropTypes.number.isRequired,
-  }).isRequired,
+const makeCSSAnimation = (receive) => async (from, to) => {
+  receive.setup(from, to)
+  await frame()
+  receive.run(from, to)
+  await new Promise(resolve => from.addEventListener('transitionend', resolve))
+  receive.teardown(from, to)
+}
+
+export const WindowManagerOutline = ({ label }) => {
+  const ref = useRef()
+  const [rect, setRect] = useState(originRect)
+  const [animate, setAnimate] = useState(false)
+
+  const send = () => {}
+  const receive = makeCSSAnimation({
+    setup: (from, to) => {
+      setRect(flipRect(from, to))
+      setAnimate(false)
+    },
+    run: () => {
+      setRect(rect)
+      setAnimate(true)
+    },
+    teardown: () => {
+      setAnimate(false)
+    },
+  })
+  useDeferredAnimation(label, ref, true, send, receive)
+
+  return <Outline ref={ref} rect={rect} animate={animate} />
 }

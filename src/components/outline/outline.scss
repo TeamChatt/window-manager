@@ -1,12 +1,12 @@
 @import '#style/index';
 @import '#themes/oldschool/theme';
 
-.window-manager-outline {
+.outline {
   position: absolute;
   border: 2px solid $color-black;
 }
 
-.window-manager-outline--animate {
+.outline--animate {
   transition:
     top    $animation-duration-fast steps(6),
     left   $animation-duration-fast steps(6),
