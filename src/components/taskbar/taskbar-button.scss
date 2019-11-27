@@ -23,6 +23,7 @@ $gradient-reverse: linear-gradient(
 );
 
 .taskbar-button {
+  position: relative;
   margin: 0;
   padding: $space-inset-stretch-s;
   border: $border-style-button;
