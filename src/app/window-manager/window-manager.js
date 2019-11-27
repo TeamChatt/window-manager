@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { frame } from '/utils/frame'
 
 import { useDeferredAnimation } from '/components/generic/animation'
 import { Window } from '/components/window'
@@ -28,6 +29,13 @@ const flipPosition = (from, to) => ({
   right:  -(from.right  - to.right),
 })
 
+const makeCSSAnimation = (receive) => async (from, to) => {
+  receive.setup(from, to)
+  await frame()
+  await receive.run(from, to)
+  receive.teardown(from, to)
+}
+
 const WindowManagerApp = () => {
   const [showChatWindow, setShowChatWindow] = useState(true)
   const toggleShowChatWindow = () => {
@@ -42,42 +50,40 @@ const WindowManagerApp = () => {
   const [taskbarRect, setTaskbarRect] = useState(rect)
   const [animateTaskbar, setAnimateTaskbar] = useState(false)
   
-  const sendObject = {
-    exit:     () => {},
-    exiting:  () => {},
-    exited:   () => {},
-  }
-
-  useDeferredAnimation('chat', windowRef, showChatWindow, sendObject, {
-    enter: (from, to) => {
+  const sendObject = () => {}
+  const receiveWindow = makeCSSAnimation({
+    setup: (from, to) => {
       const newRect = flipRect(from.current, to.current)
       setWindowRect(newRect)
       setAnimateWindow(false)
     },
-    entering: (to) => {
+    run: (from) => {
       setWindowRect(rect)
       setAnimateWindow(true)
-      return new Promise(resolve => to.current.addEventListener('transitionend', resolve))
+      return new Promise(resolve => from.current.addEventListener('transitionend', resolve))
     },
-    entered: () => {
+    teardown: () => {
       setAnimateWindow(false)
     },
   })
-  useDeferredAnimation('chat', taskbarItemRef, !showChatWindow, sendObject, {
-    enter: (from, to) => {
+  const receiveTaskbar = makeCSSAnimation({
+    setup: (from, to) => {
       const newRect = flipRect(from.current, to.current)
       setTaskbarRect(newRect)
       setAnimateTaskbar(false)
     },
-    entering: (to) => {
+    run: (from) => {
       setTaskbarRect(rect)
       setAnimateTaskbar(true)
-      return new Promise(resolve => to.current.addEventListener('transitionend', resolve))
+      return new Promise(resolve => from.current.addEventListener('transitionend', resolve))
     },
-    entered: () => {
+    teardown: () => {
       setAnimateTaskbar(false)
     },
   })
+
+  useDeferredAnimation('chat', windowRef, showChatWindow, sendObject, receiveWindow)
+  useDeferredAnimation('chat', taskbarItemRef, !showChatWindow, sendObject, receiveTaskbar)
 
   const chatWindow = (
     <WindowManagerFrame>

@@ -1,5 +1,4 @@
 import { useContext, useEffect } from 'react'
-import { frame } from '/utils/frame'
 import AnimationContext from '../context'
 
 // const useAnimation = (inProp, animateIn, animateOut) => {
@@ -30,19 +29,13 @@ const useDeferredAnimation = (label, ref, inProp, send, receive) => {
   const runEnter = async () => {
     const matched = await animationCoordinator.in(label, ref)  
     if(matched) {
-      receive.enter(matched, ref)
-      await frame()
-      await receive.entering(matched, ref)
-      receive.entered(matched, ref)
+      receive(matched, ref)
     }
   }
   const runExit = async () => {
     const matched = await animationCoordinator.out(label, ref)  
     if(matched) {
-      send.exit(ref, matched)
-      await frame()
-      await send.exiting(ref, matched)
-      send.exited(ref, matched)
+      send(ref, matched)
     }
   }
 
