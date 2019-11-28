@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-
 import { useCSSAnimation } from '/components/generic/animation'
 
 import styles from './window.scss'
@@ -7,9 +6,9 @@ import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
 const transitionClassNames = {
-  'enter':        cx('window--enter'),
-  'enter-active': cx('window--enter-active'),
-  'enter-done':   cx('window--enter-done'),
+  'enter':        cx('appear--enter'),
+  'enter-active': cx('appear--enter-active'),
+  'enter-done':   cx('appear--enter-done'),
 }
 
 export const Window = ({ title, children }) => {

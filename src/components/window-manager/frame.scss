@@ -6,10 +6,32 @@
   flex: 1;
   max-width: 600px;
   position: relative;
-  box-shadow: $os-shadow-l;
 
   @include media-breakpoint-l {
     margin-top: $space-l;
     margin-bottom: $space-m;
   }
+}
+
+.window-manager-frame_shadow {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: $os-shadow-l;
+}
+
+// Transitions
+.appear--enter {
+  opacity: 0;
+}
+.appear--enter-active {
+  transition: opacity;
+  transition-delay: $animation-duration-fast;
+  opacity: 1;
+}
+.appear--enter-done {
+  opacity: 1;
 }

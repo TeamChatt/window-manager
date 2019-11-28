@@ -39,14 +39,14 @@
 }
 
 // Transitions
-.window--enter {
+.appear--enter {
   opacity: 0;
 }
-.window--enter-active {
+.appear--enter-active {
   transition: opacity;
   transition-delay: $animation-duration-fast;
   opacity: 1;
 }
-.window--enter-done {
+.appear--enter-done {
   opacity: 1;
 }
