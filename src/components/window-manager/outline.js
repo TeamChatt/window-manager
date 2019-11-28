@@ -26,7 +26,7 @@ const makeCSSAnimation = (receive) => async (from, to) => {
   receive.setup(from, to)
   await frame()
   receive.run(from, to)
-  await new Promise(resolve => from.addEventListener('transitionend', resolve))
+  await new Promise(resolve => to.addEventListener('transitionend', resolve))
   receive.teardown(from, to)
 }
 

@@ -2,11 +2,14 @@
 @import '#themes/oldschool/theme';
 
 .outline {
+  opacity: 0;
   position: absolute;
   border: 2px solid $color-black;
+  pointer-events: none;
 }
 
 .outline--animate {
+  opacity: 1;
   transition:
     top    $animation-duration-fast steps(6),
     left   $animation-duration-fast steps(6),
