@@ -35,7 +35,6 @@ export const WindowManagerOutline = ({ label }) => {
   const [rect, setRect] = useState(originRect)
   const [animate, setAnimate] = useState(false)
 
-  const send = () => {}
   const receive = makeCSSAnimation({
     setup: (from, to) => {
       setRect(flipRect(from, to))
@@ -49,7 +48,8 @@ export const WindowManagerOutline = ({ label }) => {
       setAnimate(false)
     },
   })
-  useDeferredAnimation(label, ref, true, send, receive)
+  const send = () => {}
+  useDeferredAnimation(label, ref, true, receive, send)
 
   return <Outline ref={ref} rect={rect} animate={animate} />
 }

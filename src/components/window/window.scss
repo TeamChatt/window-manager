@@ -37,3 +37,16 @@
   flex: 1;
   overflow: hidden;
 }
+
+// Transitions
+.window--enter {
+  opacity: 0;
+}
+.window--enter-active {
+  transition: opacity;
+  transition-delay: $animation-duration-fast;
+  opacity: 1;
+}
+.window--enter-done {
+  opacity: 1;
+}
