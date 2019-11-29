@@ -1,3 +1,3 @@
 export { WindowManager } from './manager'
-export { WindowManagerFrame } from './frame'
-export { WindowManagerOutline } from './outline'
+export { WMWindow } from './window'
+export { WMTaskbarButton } from './taskbar-button'

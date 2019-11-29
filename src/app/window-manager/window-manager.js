@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 
-import { Window } from '/components/window'
 import { FileGridItem } from '/components/file-grid'
-import { WindowManager, WindowManagerFrame, WindowManagerOutline } from '/components/window-manager'
-import { TaskbarButton } from '/components/taskbar'
+import { WindowManager, WMWindow, WMTaskbarButton } from '/components/window-manager'
 
 import background from './touhou-wings.jpg'
 import folder from './folder.png'
@@ -15,10 +13,7 @@ const WindowManagerApp = () => {
   }
 
   const chatWindow = (
-    <WindowManagerFrame>
-      <Window title="Chat" />
-      <WindowManagerOutline label="chat" />
-    </WindowManagerFrame>
+    <WMWindow label="chat" title="Chat" />
   )
 
   const windows = (
@@ -36,10 +31,9 @@ const WindowManagerApp = () => {
   )
   const taskbarItems = (
     <>
-      <TaskbarButton active={showChatWindow} onClick={toggleShowChatWindow}>
+      <WMTaskbarButton label="chat" active={showChatWindow} onClick={toggleShowChatWindow}>
         Chat
-        {!showChatWindow && <WindowManagerOutline label="chat" />}
-      </TaskbarButton>
+      </WMTaskbarButton>
     </>
   )
 
