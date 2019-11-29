@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { FileGridItem } from '/components/file-grid'
 import { WindowManager, WMWindow, WMTaskbarButton } from '/components/window-manager'
 
-import background from './touhou-wings.jpg'
-import folder from './folder.png'
+import background from './images/touhou-wings.jpg'
+import folder from './images/folder.png'
 
-const WindowManagerApp = () => {
+const ExampleApp = () => {
   const [showChatWindow, setShowChatWindow] = useState(true)
   const toggleShowChatWindow = () => {
     setShowChatWindow(show => !show)
@@ -47,4 +47,4 @@ const WindowManagerApp = () => {
   )
 }
 
-export default WindowManagerApp
+export default ExampleApp

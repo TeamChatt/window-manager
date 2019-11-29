@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { BSOD } from '/components/blue-screen-of-death'
 
-class ErrorBoundary extends Component {
+export class ErrorBoundary extends Component {
   constructor(props) {
     super(props)
     this.state = { error: null }
@@ -23,5 +23,3 @@ class ErrorBoundary extends Component {
     return children
   }
 }
-
-export default ErrorBoundary
