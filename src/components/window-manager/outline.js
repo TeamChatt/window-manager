@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { frame } from '/utils/frame'
+import frame from '/utils/frame'
 
 import { Outline } from '/components/outline'
 import { useDeferredAnimation } from '/components/generic/animation'
@@ -33,26 +33,31 @@ const makeCSSAnimation = (receive) => async function * (from, to) {
 }
 const noAnimation = async function*(){}
 
-export const WindowManagerOutline = ({ label }) => {
-  const ref = useRef()
+const useAnimateRect = (label, ref) => {
   const [rect, setRect] = useState(originRect)
-  const [animate, setAnimate] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const receive = makeCSSAnimation({
     setup: (from, to) => {
       setRect(flipRect(from, to))
-      setAnimate(false)
+      setIsAnimating(false)
     },
     run: () => {
       setRect(rect)
-      setAnimate(true)
+      setIsAnimating(true)
     },
     teardown: () => {
-      setAnimate(false)
+      setIsAnimating(false)
     },
   })
   const send = noAnimation
   useDeferredAnimation(label, ref, true, receive, send)
 
-  return <Outline ref={ref} rect={rect} animate={animate} />
+  return { rect, isAnimating }
+}
+
+export const WindowManagerOutline = ({ label }) => {
+  const ref = useRef()
+  const { isAnimating, rect } = useAnimateRect(label, ref)
+  return <Outline ref={ref} rect={rect} animate={isAnimating} />
 }

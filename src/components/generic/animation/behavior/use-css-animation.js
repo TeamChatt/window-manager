@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import cx from 'classnames'
-import { frame } from '/utils/frame'
+import frame from '/utils/frame'
 import runAsyncProcess from '/utils/run-async'
 import useAnimation from './use-animation'
 

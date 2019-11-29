@@ -1,5 +1,5 @@
 import defer from '/utils/defer'
-import { frame } from '/utils/frame'
+import frame from '/utils/frame'
 
 class AsyncMap {
   constructor() {
