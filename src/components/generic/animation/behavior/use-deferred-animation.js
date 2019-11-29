@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import runAsyncProcess from '/utils/run-async'
 import useAnimation from './use-animation'
 import AnimationContext from '../context'
 
@@ -12,22 +13,22 @@ const makeSurrogate = (el) => {
 const useDeferredAnimation = (label, ref, inProp, receive, send) => {
   const animationCoordinator = useContext(AnimationContext)
 
-  // TODO: make these cancelable
-  const animateIn = async () => {
+  const animateIn = async function * (){
     const matched = await animationCoordinator.in(label, ref.current)
+    yield
     if(matched) {
-      receive(matched, ref.current)
+      yield* receive(matched, ref.current)
     }
   }
-  const animateOut = async () => {
-    const rect = ref.current.getBoundingClientRect()
-    const matched = await animationCoordinator.out(label, rect)
+  const animateOut = async function * (){
+    const matched = await animationCoordinator.out(label, ref.current)
+    yield
     if(matched) {
-      send(ref.current, matched)
+      yield* send(ref.current, matched)
     }
   }
 
-  useAnimation(ref, inProp, animateIn, animateOut)
+  useAnimation(ref, inProp, runAsyncProcess(animateIn), runAsyncProcess(animateOut))
   
   useEffect(() => {
     return () => {

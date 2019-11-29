@@ -1,24 +1,24 @@
 import { useState } from 'react'
 import cx from 'classnames'
 import { frame } from '/utils/frame'
-
+import runAsyncProcess from '/utils/run-async'
 import useAnimation from './use-animation'
 
-const stagedAnimation = (animation) => async (el) => {
+const stagedAnimation = (animation) => async function *(el) {
   animation.setup()
-  await frame()
+  yield await frame()
   animation.run()
-  await new Promise(resolve => el.addEventListener('transitionend', resolve, { once: true }))
+  yield await new Promise(resolve => el.addEventListener('transitionend', resolve, { once: true }))
   animation.teardown()
 }
 
 const useAnimationState = (name) => {
   const [animationState, setAnimationState] = useState([])
-  const runAnimation = stagedAnimation({
+  const runAnimation = runAsyncProcess(stagedAnimation({
     setup:    () => setAnimationState([name]),
     run:      () => setAnimationState([name, `${name}-active`]),
     teardown: () => setAnimationState([name, `${name}-done`]),
-  })
+  }))
 
   return [animationState, runAnimation]
 }

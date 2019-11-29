@@ -22,13 +22,16 @@ const flipPosition = (from, to) => ({
   bottom: -(from.bottom - to.bottom),
   right:  -(from.right  - to.right),
 })
-const makeCSSAnimation = (receive) => async (from, to) => {
+const makeCSSAnimation = (receive) => async function * (from, to) {
   receive.setup(from, to)
   await frame()
+  yield
   receive.run(from, to)
   await new Promise(resolve => to.addEventListener('transitionend', resolve))
+  yield
   receive.teardown(from, to)
 }
+const noAnimation = async function*(){}
 
 export const WindowManagerOutline = ({ label }) => {
   const ref = useRef()
@@ -48,7 +51,7 @@ export const WindowManagerOutline = ({ label }) => {
       setAnimate(false)
     },
   })
-  const send = () => {}
+  const send = noAnimation
   useDeferredAnimation(label, ref, true, receive, send)
 
   return <Outline ref={ref} rect={rect} animate={animate} />
