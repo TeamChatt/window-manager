@@ -34,13 +34,13 @@ class AnimationCoordinator {
     return new AnimationCoordinator()
   }
   
-  async in(label, ref) {
-    this.inMap.set(label, ref)
-    return this.outMap.get(label)
+  async in(id, ref) {
+    this.inMap.set(id, ref)
+    return this.outMap.get(id)
   }
-  async out(label, ref) {
-    this.outMap.set(label, ref)
-    return this.inMap.get(label)
+  async out(id, ref) {
+    this.outMap.set(id, ref)
+    return this.inMap.get(id)
   }
 }
 

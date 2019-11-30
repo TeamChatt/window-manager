@@ -13,7 +13,7 @@ const ExampleApp = () => {
   }
 
   const chatWindow = (
-    <WMWindow label="chat" title="Chat" />
+    <WMWindow id="chat" title="Chat" />
   )
 
   const windows = (
@@ -31,7 +31,7 @@ const ExampleApp = () => {
   )
   const taskbarItems = (
     <>
-      <WMTaskbarButton label="chat" active={showChatWindow} onClick={toggleShowChatWindow}>
+      <WMTaskbarButton id="chat" active={showChatWindow} onClick={toggleShowChatWindow}>
         Chat
       </WMTaskbarButton>
     </>

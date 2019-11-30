@@ -10,18 +10,18 @@ const makeSurrogate = (el) => {
   }
 }
 
-const useDeferredAnimation = (label, ref, inProp, receive, send) => {
+const useDeferredAnimation = (id, ref, inProp, receive, send) => {
   const animationCoordinator = useContext(AnimationContext)
 
   const animateIn = async function * (){
-    const matched = await animationCoordinator.in(label, ref.current)
+    const matched = await animationCoordinator.in(id, ref.current)
     yield
     if(matched) {
       yield* receive(matched, ref.current)
     }
   }
   const animateOut = async function * (){
-    const matched = await animationCoordinator.out(label, ref.current)
+    const matched = await animationCoordinator.out(id, ref.current)
     yield
     if(matched) {
       yield* send(ref.current, matched)
@@ -32,7 +32,7 @@ const useDeferredAnimation = (label, ref, inProp, receive, send) => {
   
   useEffect(() => {
     return () => {
-      animationCoordinator.out(label, makeSurrogate(ref.current))
+      animationCoordinator.out(id, makeSurrogate(ref.current))
     }
   }, [])
 }

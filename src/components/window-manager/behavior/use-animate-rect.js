@@ -32,7 +32,7 @@ const makeCSSAnimation = (receive) => async function * (from, to) {
 }
 const noAnimation = async function*(){}
 
-const useAnimateRect = (label, ref) => {
+const useAnimateRect = (id, ref) => {
   const [rect, setRect] = useState(originRect)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -50,7 +50,7 @@ const useAnimateRect = (label, ref) => {
     },
   })
   const send = noAnimation
-  useDeferredAnimation(label, ref, true, receive, send)
+  useDeferredAnimation(id, ref, true, receive, send)
 
   return { rect, isAnimating }
 }
