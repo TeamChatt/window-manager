@@ -1,6 +1,9 @@
 const path = require('path')
 
 module.exports = {
+  output: {
+    libraryTarget: 'umd',
+  },
   externals: {
     react: {
       root: 'React',
@@ -30,6 +33,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
