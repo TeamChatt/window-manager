@@ -1,6 +1,6 @@
 {
-  "name": "window-manager",
-  "version": "1.0.0",
+  "name": "@team-chatt/window-manager",
+  "version": "0.0.1",
   "description": "Throwback Windows-XP style react components",
   "main": "index.js",
   "scripts": {
