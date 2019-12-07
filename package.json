@@ -1,10 +1,10 @@
 {
   "name": "window-manager",
   "version": "1.0.0",
-  "description": "",
+  "description": "Throwback Windows-XP style react components",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --history-api-fallback --port 4500 --host 0.0.0.0",
+    "start": "webpack-dev-server --mode development --config webpack.example.config.js --open --port 4500",
     "build": "webpack --mode production"
   },
   "author": "Matt Kaemmerer <matthew.kaemmerer@gmail.com>",
@@ -25,6 +25,7 @@
     "html-webpack-plugin": "^3.1.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
+    "react-dom": "^16.10.2",
     "react-svg-loader": "^3.0.3",
     "sass-loader": "^8.0.0",
     "url-loader": "^2.2.0",
@@ -33,14 +34,13 @@
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
-    "@mdi/svg": "^4.5.95",
     "classnames": "^2.2.5",
     "normalize-scss": "^7.0.0",
-    "open-color": "^1.7.0",
+    "open-color": "^1.7.0"
+  },
+  "peerDependencies": {
     "prop-types": "^15.6.0",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-transition-group": "^4.3.0"
+    "react": "^16.10.2"
   },
   "browserslist": "last 2 Chrome versions, last 2 Safari versions, last 2 Firefox versions"
 }

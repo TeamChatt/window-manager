@@ -5,10 +5,10 @@ import {
   WMWindow,
   WMTaskbarButton,
   WMFileGridItem,
-} from '/components/window-manager'
+} from 'window-manager'
 
-import background from './images/touhou-wings.jpg'
-import folder from './images/folder.png'
+import background from '../images/touhou-wings.jpg'
+import folder from '../images/folder.png'
 
 const useWindowState = (initialState = 'closed') => {
   const [state, setState] = useState(initialState)

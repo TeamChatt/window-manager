@@ -1,19 +1,10 @@
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
-  externals: {
-    react: {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react',
-    },
-    'prop-types': {
-      root: 'PropTypes',
-      commonjs: 'prop-types',
-      commonjs2: 'prop-types',
-      amd: 'prop-types',
-    },
+  entry: {
+    index: ['./example/src/index.js'],
   },
   optimization: {
     splitChunks: {
@@ -30,6 +21,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -53,12 +45,29 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: { minimize: true }
+          },
+        ],
+      },
     ]
   },
   resolve: {
     alias: {
       '#style':  path.resolve(__dirname, 'src/style/'),
       '#themes': path.resolve(__dirname, 'src/themes/'),
+      'window-manager': path.resolve(__dirname, 'src/'),
     },
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './example/index.html',
+      filename: './index.html',
+    }),
+    new MiniCssExtractPlugin(),
+  ],
 }

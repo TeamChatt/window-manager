@@ -1,2 +1,6 @@
-import './style/document.scss'
-import './app'
+export {
+  WindowManager,
+  WMWindow,
+  WMTaskbarButton,
+  WMFileGridItem,
+} from '/components/window-manager'
