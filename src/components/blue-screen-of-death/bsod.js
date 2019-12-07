@@ -4,7 +4,7 @@ import styles from './bsod.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const BSOD = ({ error }) => (
+export const BSOD = ({ error }) => (
   <div className={cx('bsod')}>
     <div className={cx('bsod_column')}>
       <h2>Error</h2>
@@ -13,5 +13,3 @@ const BSOD = ({ error }) => (
     </div>
   </div>
 )
-
-export default BSOD

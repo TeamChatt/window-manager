@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import { BSOD } from '/components/blue-screen-of-death'
+import { BSOD } from './bsod'
 
-export class ErrorBoundary extends Component {
+export class BSODErrorBoundary extends Component {
   constructor(props) {
     super(props)
     this.state = { error: null }

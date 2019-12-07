@@ -1,1 +1,2 @@
-export { default as BSOD } from './bsod'
+export { BSOD } from './bsod'
+export { BSODErrorBoundary } from './error-boundary'

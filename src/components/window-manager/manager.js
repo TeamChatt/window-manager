@@ -4,14 +4,14 @@ import { AnimationContainer } from '/components/generic/animation'
 import { FileGrid } from '/components/file-grid'
 import { Desktop } from '/components/desktop'
 import { Taskbar } from '/components/taskbar'
-import { ErrorBoundary } from './error-boundary'
+import { BSODErrorBoundary } from '/components/blue-screen-of-death'
 
 import styles from './manager.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
 export const WindowManager = ({ background, windows, desktopItems, taskbarItems }) => (
-  <ErrorBoundary>
+  <BSODErrorBoundary>
     <AnimationContainer>
       <div className={cx('window-manager')}>
         <div className={cx('window-manager_layer-group')}>
@@ -27,5 +27,5 @@ export const WindowManager = ({ background, windows, desktopItems, taskbarItems 
         <Taskbar>{taskbarItems}</Taskbar>
       </div>
     </AnimationContainer>
-  </ErrorBoundary>
+  </BSODErrorBoundary>
 )

@@ -25,14 +25,12 @@ $item-size: 72px;
 }
 
 .desktop_background {
-  @include media-breakpoint-l {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-position: top center;
-    background-size: cover;
-    transition: background 3s;
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-position: top center;
+  background-size: cover;
+  transition: background 3s;
 }

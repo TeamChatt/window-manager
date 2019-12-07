@@ -6,8 +6,10 @@
   flex: 1;
   max-width: 600px;
   position: relative;
+  background: $color-blue;
 
   @include media-breakpoint-l {
+    background: none;
     margin-top: $space-l;
     margin-bottom: $space-m;
   }
