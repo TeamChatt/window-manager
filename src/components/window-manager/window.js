@@ -13,16 +13,24 @@ const transitionClassNames = {
   'enter-done':   cx('appear--enter-done'),
 }
 
-export const WMWindow = ({ id, title, children }) => {
+export const WMWindow = ({ id, title, children, onMinimize, onClose }) => {
   const ref = useRef()
   const transitionClassName = useCSSAnimation(ref, true, transitionClassNames)
   return (
     <div className={cx('window-frame')}>
-      <Window className={transitionClassName} title={title}>
+      <Window
+        className={transitionClassName}
+        title={title}
+        onMinimize={onMinimize}
+        onClose={onClose}
+      >
         {children}
       </Window>
       <WMOutline id={id} />
-      <div ref={ref} className={cx('window-frame_shadow', transitionClassName)} />
+      <div
+        ref={ref}
+        className={cx('window-frame_shadow', transitionClassName)}
+      />
     </div>
   )
 }

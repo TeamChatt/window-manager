@@ -4,12 +4,15 @@ $u3: 3*$u1;
 $u4: 4*$u1;
 $u8: 8*$u1;
 
+$space-xxs:             $u1/2;
 $space-xs:              $u1;
 $space-s:               $u2;
 $space-m:               $u3;
 $space-l:               $u4;
 $space-xl:              $u8;
 
+$space-inset-xxs:       $u1/2 $u1/2 $u1/2 $u1/2;
+$space-inset-xs:        $u1 $u1 $u1 $u1;
 $space-inset-xs:        $u1 $u1 $u1 $u1;
 $space-inset-s:         $u2 $u2 $u2 $u2;
 $space-inset-m:         $u3 $u3 $u3 $u3;

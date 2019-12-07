@@ -1,6 +1,26 @@
 @import '#style/index';
 @import '#themes/oldschool/theme';
 
+$header-gradient: linear-gradient(
+  to bottom,
+  $color-blue-3 0%,
+  $color-blue-6 10%,
+  $color-blue-5 30%,
+  $color-blue-5 80%,
+  $color-blue-7 100%
+);
+
+$highlight-gradient: linear-gradient(
+  to bottom,
+  transparentize($color-white, 1) 0%,
+  transparentize($color-white, 0.6) 5%,
+  transparentize($color-white, 1) 15%,
+  transparentize($color-white, 1) 85%,
+  transparentize($color-black, 0.9) 100%
+);
+
+$box-shadow-focus: 0 0 0 2px $color-orange-4;
+
 .window {
   display: flex;
   flex: 1;
@@ -15,38 +35,57 @@
 
 
 .window_header {
+  display: flex;
+  background: $header-gradient;
+  border-top-right-radius: $border-radius-m - 2px;
+  border-top-left-radius: $border-radius-m - 2px;
+}
+
+.window_title {
+  flex: 1;
   color: $color--text-inverse;
   padding: $space-inset-stretch-m;
   text-shadow: 0 1px transparentize($color-black, 0.5);
+}
 
-  background: linear-gradient(
-    to bottom,
-    $color-blue-3 0%,
-    $color-blue-6 10%,
-    $color-blue-5 30%,
-    $color-blue-5 80%,
-    $color-blue-7 100%
-  );
+.window_buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: $space-xxs;
+  padding: $space-inset-xxs;
+}
 
-  border-top-right-radius: $border-radius-m - 2px;
-  border-top-left-radius: $border-radius-m - 2px;
+.window-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+
+  border-radius: $border-radius-s;
+  border: 1px solid $color-white;
+  background:
+    $highlight-gradient,
+    $color-blue;
+  
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: $box-shadow-focus;
+  }
+}
+.window-button--close {
+  background:
+    $highlight-gradient,
+    $color-red;
 }
 
 .window_body {
   display: flex;
   flex: 1;
   overflow: hidden;
-}
-
-// Transitions
-.appear--enter {
-  opacity: 0;
-}
-.appear--enter-active {
-  transition: opacity;
-  transition-delay: $animation-duration-fast;
-  opacity: 1;
-}
-.appear--enter-done {
-  opacity: 1;
 }

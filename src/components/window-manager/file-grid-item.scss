@@ -1,0 +1,14 @@
+@import '#style/index';
+
+.file-grid-item {
+  position: relative;
+}
+
+.file-grid-item_origin {
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  bottom: 50%;
+  right: 50%;
+}

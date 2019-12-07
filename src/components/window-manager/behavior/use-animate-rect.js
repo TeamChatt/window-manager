@@ -42,7 +42,7 @@ const useAnimateRect = (id, ref) => {
       setIsAnimating(false)
     },
     run: () => {
-      setRect(rect)
+      setRect(originRect)
       setIsAnimating(true)
     },
     teardown: () => {

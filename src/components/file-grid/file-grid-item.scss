@@ -5,6 +5,17 @@ $item-size: 72px;
 $icon-size: 48px;
 
 .file-grid-item {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: 0;
+}
+
+.file-grid-item:focus {
+  outline: none;
+}
+
+.file-grid-item_inner {
   display: grid;
   width: $item-size;
   height: $item-size;
@@ -19,10 +30,20 @@ $icon-size: 48px;
 .file-grid-item_icon {
   width: $icon-size;
   height: $icon-size;
+
+  .file-grid-item:focus & {
+    filter: sepia(1) saturate(2) hue-rotate(185deg) brightness(0.7);
+  }
 }
 
 .file-grid-item_label {
+  display: block;
+  padding: $space-inset-xxs;
   color: $color--text-inverse;
   font-size: $font-size-s;
   text-shadow: 0 1px transparentize($color-black, 0.5);
+
+  .file-grid-item:focus & {
+    background: $color-blue-6;
+  }
 }
