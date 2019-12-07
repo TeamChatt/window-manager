@@ -59,7 +59,6 @@ module.exports = {
   resolve: {
     alias: {
       '#style':  path.resolve(__dirname, 'src/style/'),
-      '#themes': path.resolve(__dirname, 'src/themes/'),
       'window-manager': path.resolve(__dirname, 'src/'),
     },
   },

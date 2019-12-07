@@ -3,7 +3,6 @@
     "baseUrl": "./",
     "paths": {
       "#style/*": ["src/style/*"],
-      "#themes/*": ["src/themes/*"],
       "/*": ["src/*"]
     }
   },
