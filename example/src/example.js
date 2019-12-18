@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-
+import React, { useReducer } from 'react'
+import { pathLens, modifyAt } from '../../src/utils/lenses'
 import {
   WindowManager,
   WMWindow,
@@ -10,112 +10,86 @@ import {
 import background from '../images/touhou-wings.jpg'
 import folder from '../images/folder.png'
 
-const useWindowState = (initialState = 'closed') => {
-  const [state, setState] = useState(initialState)
-  const open     = () => setState('open')
-  const minimize = () => setState('minimized')
-  const close    = () => setState('closed')
-  const toggle   = () => setState(s => s === 'open' ? 'minimized' : 'open')
-  const action = {
-    open,
-    minimize,
-    close,
-    toggle,
+const initialWindowState = {
+  chat: {
+    state: 'open',
+    title: 'Chat',
+    UI: <div>Chat</div>,
+  },
+  pictures: {
+    state: 'closed',
+    title: 'Pictures',
+    UI: <div>Pictures</div>,
+  },
+  music: {
+    state: 'closed',
+    title: 'Music',
+    UI: <div>Music</div>,
+  },
+}
+const windowReducer = (state, { type, id }) => {
+  const lens = pathLens(id, 'state')
+  switch(type) {
+    case 'open':     return modifyAt(lens, state, () => 'open')
+    case 'minimize': return modifyAt(lens, state, () => 'minimized')
+    case 'close':    return modifyAt(lens, state, () => 'closed')
+    case 'toggle':   return modifyAt(lens, state, s => s === 'open' ? 'minimized' : 'open')
   }
-  return [state, action]
+}
+const useWindowState = (initialState = initialWindowState) => {
+  const [state, dispatch] = useReducer(windowReducer, initialState)
+  return [state, dispatch]
 }
 
 const ExampleApp = () => {
-  const [chatWindowState, chatWindowAction]       = useWindowState('open')
-  const [pictureWindowState, pictureWindowAction] = useWindowState('closed')
-  const [musicWindowState, musicWindowAction]     = useWindowState('closed')
+  const [windowState, dispatch] = useWindowState()
+  const windowEntries = Object.entries(windowState)
 
-  const chatWindow = (
-    <WMWindow
-      id="chat"
-      title="Chat"
-      onMinimize={chatWindowAction.minimize}
-      onClose={chatWindowAction.close}
-    />
+  const windows = windowEntries.map(
+    ([id, { title, state, UI }]) =>
+      state === 'open' && (
+        <WMWindow
+          key={id}
+          id={id}
+          title={title}
+          onMinimize={() => dispatch({ type: 'minimize', id })}
+          onClose={() => dispatch({ type: 'close', id })}
+        >
+          {UI}
+        </WMWindow>
+      )
   )
-  const pictureWindow = (
-    <WMWindow
-      id="pictures"
-      title="Pictures"
-      onMinimize={pictureWindowAction.minimize}
-      onClose={pictureWindowAction.close}
-    />
-  )
-  const musicWindow = (
-    <WMWindow
-      id="music"
-      title="Music"
-      onMinimize={musicWindowAction.minimize}
-      onClose={musicWindowAction.close}
-    />
+  const taskbarItems = windowEntries.map(
+    ([id, { title, state }]) =>
+      state !== 'closed' && (
+        <WMTaskbarButton
+          key={id}
+          id={id}
+          active={state === 'open'}
+          hasOutline={state === 'minimized'}
+          onClick={() => dispatch({ type: 'toggle', id })}
+        >
+          {title}
+        </WMTaskbarButton>
+      )
   )
 
-  const windows = (
-    <>
-      {chatWindowState    === 'open' && chatWindow}
-      {pictureWindowState === 'open' && pictureWindow}
-      {musicWindowState   === 'open' && musicWindow}
-    </>
-  )
   const desktopItems = (
     <>
       <WMFileGridItem 
         icon={folder}
         label="Pictures"
         id="pictures"
-        hasOutline={pictureWindowState === 'closed'}
-        onDoubleClick={pictureWindowAction.open}
+        hasOutline={windowState.pictures.state === 'closed'}
+        onDoubleClick={() => dispatch({ type: 'open', id: 'pictures' })}
       />
       <WMFileGridItem 
         icon={folder}
         label="Music"
         id="music"
-        hasOutline={musicWindowState === 'closed'}
-        onDoubleClick={musicWindowAction.open}
+        hasOutline={windowState.music.state === 'closed'}
+        onDoubleClick={() => dispatch({ type: 'open', id: 'music' })}
       />
-    </>
-  )
-
-  const chatButton = (
-    <WMTaskbarButton
-      id="chat"
-      active={chatWindowState === 'open'}
-      hasOutline={chatWindowState === 'minimized'}
-      onClick={chatWindowAction.toggle}
-    >
-      Chat
-    </WMTaskbarButton>
-  )
-  const pictureButton = (
-    <WMTaskbarButton
-      id="pictures"
-      active={pictureWindowState === 'open'}
-      hasOutline={pictureWindowState === 'minimized'}
-      onClick={pictureWindowAction.toggle}
-    >
-      Pictures
-    </WMTaskbarButton>
-  )
-  const musicButton = (
-    <WMTaskbarButton
-      id="music"
-      active={musicWindowState === 'open'}
-      hasOutline={musicWindowState === 'minimized'}
-      onClick={musicWindowAction.toggle}
-    >
-      Music
-    </WMTaskbarButton>
-  )
-  const taskbarItems = (
-    <>
-      {chatWindowState    !== 'closed' && chatButton}
-      {pictureWindowState !== 'closed' && pictureButton}
-      {musicWindowState   !== 'closed' && musicButton}
     </>
   )
 

@@ -8,8 +8,11 @@
   position: relative;
   background: $color-blue;
 
-  @include media-breakpoint-l {
+  @include media-breakpoint-s {
     background: none;
+  }
+
+  @include media-breakpoint-l {
     margin-top: $space-l;
     margin-bottom: $space-m;
   }
