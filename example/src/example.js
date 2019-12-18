@@ -1,16 +1,59 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useRef } from 'react'
 import { pathLens, modifyAt } from '../../src/utils/lenses'
-import {
-  WindowManager,
-  WMWindow,
-  WMTaskbarButton,
-  WMFileGridItem,
-} from 'window-manager'
+import { WindowManager, WMFileGridItem } from 'window-manager'
 
 import background from '../images/touhou-wings.jpg'
 import folder from '../images/folder.png'
 
-const initialWindowState = {
+const windowReducer = (state, { type, id }) => {
+  const lens = pathLens(id, 'state')
+  switch (type) {
+    case 'open':
+      return modifyAt(lens, () => 'open')(state)
+    case 'minimize':
+      return modifyAt(lens, () => 'minimized')(state)
+    case 'close':
+      return modifyAt(lens, () => 'closed')(state)
+    case 'toggle':
+      return modifyAt(lens, s => (s === 'open' ? 'minimized' : 'open'))(state)
+  }
+}
+const defaultWindowActions = (actions, id) => ({
+  onMinimize: () => actions.minimizeWindow(id),
+  onClose:    () => actions.closeWindow(id),
+  onToggle:   () => actions.toggleWindow(id),
+})
+const withDefaultActions = (actions, id, windowState) => ({
+  ...defaultWindowActions(actions, id),
+  ...windowState,
+})
+const normalizeWindowState = actions => state => {
+  const normalize = id => {
+    const lens = pathLens(id)
+    return modifyAt(lens, s => withDefaultActions(actions, id, s))
+  }
+  return Object.keys(state)
+    .map(normalize)
+    .reduce((acc, f) => f(acc), state)
+}
+const useWindowState = initialState => {
+  const dispatchRef = useRef()
+  const actions = {
+    openWindow:     id => dispatchRef.current({ type: 'open', id }),
+    closeWindow:    id => dispatchRef.current({ type: 'close', id }),
+    minimizeWindow: id => dispatchRef.current({ type: 'minimize', id }),
+    toggleWindow:   id => dispatchRef.current({ type: 'toggle', id }),
+  }
+  const [state, dispatch] = useReducer(
+    windowReducer,
+    initialState(actions),
+    normalizeWindowState(actions)
+  )
+  dispatchRef.current = dispatch
+  return [state, actions]
+}
+
+const initialWindowState = () => ({
   chat: {
     state: 'open',
     title: 'Chat',
@@ -26,69 +69,25 @@ const initialWindowState = {
     title: 'Music',
     UI: <div>Music</div>,
   },
-}
-const windowReducer = (state, { type, id }) => {
-  const lens = pathLens(id, 'state')
-  switch(type) {
-    case 'open':     return modifyAt(lens, state, () => 'open')
-    case 'minimize': return modifyAt(lens, state, () => 'minimized')
-    case 'close':    return modifyAt(lens, state, () => 'closed')
-    case 'toggle':   return modifyAt(lens, state, s => s === 'open' ? 'minimized' : 'open')
-  }
-}
-const useWindowState = (initialState = initialWindowState) => {
-  const [state, dispatch] = useReducer(windowReducer, initialState)
-  return [state, dispatch]
-}
-
+})
 const ExampleApp = () => {
-  const [windowState, dispatch] = useWindowState()
-  const windowEntries = Object.entries(windowState)
-
-  const windows = windowEntries.map(
-    ([id, { title, state, UI }]) =>
-      state === 'open' && (
-        <WMWindow
-          key={id}
-          id={id}
-          title={title}
-          onMinimize={() => dispatch({ type: 'minimize', id })}
-          onClose={() => dispatch({ type: 'close', id })}
-        >
-          {UI}
-        </WMWindow>
-      )
-  )
-  const taskbarItems = windowEntries.map(
-    ([id, { title, state }]) =>
-      state !== 'closed' && (
-        <WMTaskbarButton
-          key={id}
-          id={id}
-          active={state === 'open'}
-          hasOutline={state === 'minimized'}
-          onClick={() => dispatch({ type: 'toggle', id })}
-        >
-          {title}
-        </WMTaskbarButton>
-      )
-  )
+  const [windowState, actions] = useWindowState(initialWindowState)
 
   const desktopItems = (
     <>
-      <WMFileGridItem 
+      <WMFileGridItem
         icon={folder}
         label="Pictures"
         id="pictures"
         hasOutline={windowState.pictures.state === 'closed'}
-        onDoubleClick={() => dispatch({ type: 'open', id: 'pictures' })}
+        onDoubleClick={() => actions.openWindow('pictures')}
       />
-      <WMFileGridItem 
+      <WMFileGridItem
         icon={folder}
         label="Music"
         id="music"
         hasOutline={windowState.music.state === 'closed'}
-        onDoubleClick={() => dispatch({ type: 'open', id: 'music' })}
+        onDoubleClick={() => actions.openWindow('music')}
       />
     </>
   )
@@ -97,8 +96,8 @@ const ExampleApp = () => {
     <WindowManager
       background={background}
       desktopItems={desktopItems}
-      taskbarItems={taskbarItems}
-      windows={windows}
+      windowState={windowState}
+      actions={actions}
     />
   )
 }

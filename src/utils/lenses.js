@@ -43,4 +43,4 @@ export const pathLens = (...args) =>
     .map(l => (typeof l === 'number' ? indexLens(l) : propertyLens(l)))
     .reduce(composeLens, idLens)
 
-export const modifyAt = (lens, s, f) => lens.set(s, f(lens.get(s)))
+export const modifyAt = (lens, f) => s => lens.set(s, f(lens.get(s)))
