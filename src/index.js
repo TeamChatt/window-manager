@@ -3,6 +3,7 @@ export {
   WMWindow,
   WMTaskbarButton,
   WMFileGridItem,
+  useWindowState,
 } from '/components/window-manager'
 
 export {
