@@ -12,31 +12,35 @@ import styles from './manager.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-export const WindowManager = ({ background, windowState, desktopItems, taskbarExtras }) => {
-  const windowEntries = Object.entries(windowState)
-  const windows = windowEntries.map(
-    ([id, { title, state, UI, onMinimize, onClose }]) =>
+export const WindowManager = ({
+  background,
+  windows,
+  desktopItems,
+  taskbarExtras,
+}) => {
+  const windowItems = windows.map(
+    ({ id, title, state, content, actions }) =>
       state === 'open' && (
         <WMWindow
           key={id}
           id={id}
           title={title}
-          onMinimize={onMinimize}
-          onClose={onClose}
+          onMinimize={actions.minimize}
+          onClose={actions.close}
         >
-          {UI}
+          {content}
         </WMWindow>
       )
   )
-  const taskbarItems = windowEntries.map(
-    ([id, { title, state, onToggle }]) =>
+  const taskbarItems = windows.map(
+    ({ id, title, state, actions }) =>
       state !== 'closed' && (
         <WMTaskbarButton
           key={id}
           id={id}
           active={state === 'open'}
           hasOutline={state === 'minimized'}
-          onClick={onToggle}
+          onClick={actions.toggle}
         >
           {title}
         </WMTaskbarButton>
@@ -53,11 +57,12 @@ export const WindowManager = ({ background, windowState, desktopItems, taskbarEx
                 <FileGrid>{desktopItems}</FileGrid>
               </Desktop>
             </div>
-            <div className={cx('window-manager_layer')}>
-              {windows}
-            </div>
+            <div className={cx('window-manager_layer')}>{windowItems}</div>
           </div>
-          <Taskbar>{taskbarItems}{taskbarExtras}</Taskbar>
+          <Taskbar>
+            {taskbarItems}
+            {taskbarExtras}
+          </Taskbar>
         </div>
       </AnimationContainer>
     </BSODErrorBoundary>

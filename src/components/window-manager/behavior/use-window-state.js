@@ -1,27 +1,18 @@
-import { useReducer, useRef } from 'react'
+import { useReducer } from 'react'
 import { pathLens, modifyAt } from '/utils/lenses'
 
-const defaultWindowActions = (actions, id) => ({
-  onMinimize: () => actions.minimizeWindow(id),
-  onClose:    () => actions.closeWindow(id),
-  onToggle:   () => actions.toggleWindow(id),
-})
-const withDefaultActions = (actions, id, windowState) => ({
-  ...defaultWindowActions(actions, id),
-  ...windowState,
-})
-const normalizeWindowState = actions => state => {
-  const normalize = id => {
-    const lens = pathLens(id)
-    return modifyAt(lens, s => withDefaultActions(actions, id, s))
+const mapObject = (obj, f) => {
+  const app = key => {
+    const lens = pathLens(key)
+    return modifyAt(lens, value => f(key, value))
   }
-  return Object.keys(state)
-    .map(normalize)
-    .reduce((acc, f) => f(acc), state)
+  return Object.keys(obj)
+    .map(app)
+    .reduce((acc, f) => f(acc), obj)
 }
 
 const windowReducer = (state, { type, id }) => {
-  const lens = pathLens(id, 'state')
+  const lens = pathLens(id)
   switch (type) {
     case 'open':
       return modifyAt(lens, () => 'open')(state)
@@ -35,19 +26,16 @@ const windowReducer = (state, { type, id }) => {
 }
 
 const useWindowState = initialState => {
-  const dispatchRef = useRef()
-  const actions = {
-    openWindow:     id => dispatchRef.current({ type: 'open', id }),
-    closeWindow:    id => dispatchRef.current({ type: 'close', id }),
-    minimizeWindow: id => dispatchRef.current({ type: 'minimize', id }),
-    toggleWindow:   id => dispatchRef.current({ type: 'toggle', id }),
-  }
   const [state, dispatch] = useReducer(
     windowReducer,
-    initialState(actions),
-    normalizeWindowState(actions),
+    initialState,
   )
-  dispatchRef.current = dispatch
+  const actions = mapObject(state, id => ({
+    open:     () => dispatch({ type: 'open', id }),
+    close:    () => dispatch({ type: 'close', id }),
+    minimize: () => dispatch({ type: 'minimize', id }),
+    toggle:   () => dispatch({ type: 'toggle', id }),
+  }))
   return [state, actions]
 }
 
