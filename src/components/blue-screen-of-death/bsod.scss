@@ -10,6 +10,7 @@
   text-align: center;
   
   height: 100vh;
+  padding: $space-inset-l;
 
   background-color: $os-color-dark-blue-0;
   color: $color-white;
@@ -22,4 +23,6 @@
 
 .bsod_column {
   max-width: 960px;
+  max-height: 100%;
+  overflow: hidden;
 }
