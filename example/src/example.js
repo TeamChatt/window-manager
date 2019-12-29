@@ -19,7 +19,7 @@ const ExampleApp = () => {
       position: {
         top: 50,
         left: 200,
-        width: 960,
+        width: 600,
         height: '80vh',
       },
     },
@@ -28,7 +28,7 @@ const ExampleApp = () => {
       position: {
         top: 80,
         left: 300,
-        width: 960,
+        width: 600,
         height: '50vh',
       },
     },
@@ -37,7 +37,7 @@ const ExampleApp = () => {
       position: {
         top: 110,
         left: 400,
-        width: 960,
+        width: 600,
         height: '50vh',
       },
     },

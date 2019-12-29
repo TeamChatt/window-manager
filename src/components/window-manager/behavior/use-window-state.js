@@ -32,7 +32,7 @@ const initialize = state => {
     position: {
       top: 50,
       left: 200 + i * 100,
-      width: 960,
+      width: 600,
       height: '80vh',
     },
     ...window,
