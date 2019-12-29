@@ -10,27 +10,20 @@ $header-gradient: linear-gradient(
   $color-blue-7 100%
 );
 
-$highlight-gradient: linear-gradient(
-  to bottom,
-  transparentize($color-white, 1) 0%,
-  transparentize($color-white, 0.6) 5%,
-  transparentize($color-white, 1) 15%,
-  transparentize($color-white, 1) 85%,
-  transparentize($color-black, 0.9) 100%
-);
-
-$box-shadow-focus: 0 0 0 2px $color-orange-4;
-
 .window {
   display: flex;
   flex: 1;
   flex-direction: column;
 
-  border: $os-border-style-window;
+  border: $os-border-style-window--fade;
   border-top-right-radius: $border-radius-m;
   border-top-left-radius: $border-radius-m;
 
   background-color: $os-color-warm-gray-0;
+}
+
+.window--focused {
+  border: $os-border-style-window;
 }
 
 
@@ -39,6 +32,13 @@ $box-shadow-focus: 0 0 0 2px $color-orange-4;
   background: $header-gradient;
   border-top-right-radius: $border-radius-m - 2px;
   border-top-left-radius: $border-radius-m - 2px;
+  user-select: none;
+  
+  filter: saturate(0.65) brightness(1.25);
+
+  .window--focused & {
+    filter: none;
+  }
 }
 
 .window_title {
@@ -54,6 +54,24 @@ $box-shadow-focus: 0 0 0 2px $color-orange-4;
   grid-gap: $space-xxs;
   padding: $space-inset-xxs;
 }
+
+.window_body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+
+$highlight-gradient: linear-gradient(
+  to bottom,
+  transparentize($color-white, 1) 0%,
+  transparentize($color-white, 0.6) 5%,
+  transparentize($color-white, 1) 15%,
+  transparentize($color-white, 1) 85%,
+  transparentize($color-black, 0.9) 100%
+);
+
+$box-shadow-focus: 0 0 0 2px $color-orange-4;
 
 .window-button {
   display: flex;
@@ -82,10 +100,4 @@ $box-shadow-focus: 0 0 0 2px $color-orange-4;
   background:
     $highlight-gradient,
     $color-red;
-}
-
-.window_body {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
 }

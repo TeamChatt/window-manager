@@ -2,12 +2,14 @@
 $os-color-warm-gray-0: #f5eee5;
 $os-color-dark-blue-0: #1e00ff;
 
-$os-color--border-standard: $color-indigo-2;
-$os-color--border-window:   $color-blue-5;
+$os-color--border-standard:      $color-indigo-2;
+$os-color--border-window:        $color-blue-5;
+$os-color--border-window--fade:  $color-blue-3;
 
 // Borders
-$os-border-style-standard: 1px solid  $os-color--border-standard;
-$os-border-style-window:   2px outset $os-color--border-window;
+$os-border-style-standard:       1px solid  $os-color--border-standard;
+$os-border-style-window:         2px outset $os-color--border-window;
+$os-border-style-window--fade:   2px outset $os-color--border-window--fade;
 
 $os-border-radius-l:  12px;
 

@@ -13,9 +13,34 @@ const ExampleApp = () => {
   )
 
   const [windowState, windowActions] = useWindowState({
-    chat: 'open',
-    pictures: 'closed',
-    music: 'closed',
+    chat: {
+      visibility: 'open',
+      isFocused: true,
+      position: {
+        top: 50,
+        left: 200,
+        width: 960,
+        height: '80vh',
+      },
+    },
+    pictures: {
+      visibility: 'closed',
+      position: {
+        top: 80,
+        left: 300,
+        width: 960,
+        height: '50vh',
+      },
+    },
+    music: {
+      visibility: 'closed',
+      position: {
+        top: 110,
+        left: 400,
+        width: 960,
+        height: '50vh',
+      },
+    },
   })
 
   const windows = [
@@ -48,14 +73,14 @@ const ExampleApp = () => {
         icon={folder}
         label="Pictures"
         id="pictures"
-        hasOutline={windowState.pictures === 'closed'}
+        hasOutline={windowState.pictures.visibility === 'closed'}
         onDoubleClick={windowActions.pictures.open}
       />
       <WMFileGridItem
         icon={folder}
         label="Music"
         id="music"
-        hasOutline={windowState.music === 'closed'}
+        hasOutline={windowState.music.visibility === 'closed'}
         onDoubleClick={windowActions.music.open}
       />
     </>

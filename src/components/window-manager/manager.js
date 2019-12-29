@@ -19,14 +19,20 @@ export const WindowManager = ({
   taskbarExtras,
 }) => {
   const windowItems = windows.map(
-    ({ id, title, state, content, actions }) =>
-      state === 'open' && (
+    ({ id, title, content, state, actions }) =>
+      state.visibility === 'open' && (
         <WMWindow
           key={id}
           id={id}
           title={title}
+          order={state.order}
+          position={state.position}
+          isFocused={state.isFocused}
           onMinimize={actions.minimize}
           onClose={actions.close}
+          onFocus={actions.focus}
+          onBlur={actions.blur}
+          onMove={actions.move}
         >
           {content}
         </WMWindow>
@@ -34,13 +40,15 @@ export const WindowManager = ({
   )
   const taskbarItems = windows.map(
     ({ id, title, state, actions }) =>
-      state !== 'closed' && (
+      state.visibility !== 'closed' && (
         <WMTaskbarButton
           key={id}
           id={id}
-          active={state === 'open'}
-          hasOutline={state === 'minimized'}
-          onClick={actions.toggle}
+          active={state.visibility === 'open'}
+          hasOutline={state.visibility === 'minimized'}
+          onClick={
+            state.visibility === 'open' ? actions.minimize : actions.open
+          }
         >
           {title}
         </WMTaskbarButton>
