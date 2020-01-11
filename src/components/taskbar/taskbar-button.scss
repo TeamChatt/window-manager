@@ -1,13 +1,14 @@
 @import '#style/index';
 @import '#style/theme';
 
-$border-style-button:         2px outset $color-blue-4;
-$border-style-button--active: 2px inset $color-blue-4;
+$border-style-button:          2px outset $color-blue-4;
+$border-style-button--active:  2px outset $color-blue-6;
+$border-style-button--pressed: 2px inset $color-blue-4;
 $box-shadow-focus: 0 0 0 2px $color-orange-4;
 
 $gradient: linear-gradient(
   to bottom,
-  $color-blue-2 0%,
+  $color-blue-3 0%,
   $color-blue-5 10%,
   $color-blue-4 30%,
   $color-blue-4 80%,
@@ -15,11 +16,19 @@ $gradient: linear-gradient(
 );
 $gradient-reverse: linear-gradient(
   to top,
-  $color-blue-2 0%,
+  $color-blue-3 0%,
   $color-blue-5 10%,
   $color-blue-4 30%,
   $color-blue-4 80%,
   $color-blue-6 100%
+);
+$gradient-dark: linear-gradient(
+  to bottom,
+  $color-blue-6 0%,
+  $color-blue-7 10%,
+  $color-blue-7 30%,
+  $color-blue-7 80%,
+  $color-blue-8 100%
 );
 
 .taskbar-button {
@@ -52,10 +61,18 @@ $gradient-reverse: linear-gradient(
   box-shadow: $box-shadow-focus;
 }
 
-.taskbar-button--active,
-.taskbar-button:active:not([disabled]) {
+.taskbar-button:hover {
+  filter: brightness(1.1);
+}
+
+.taskbar-button--active {
   border: $border-style-button--active;
-  background: $gradient-reverse;
+  background: $gradient-dark;
+}
+
+.taskbar-button:active:not([disabled]) {
+  border: $border-style-button--pressed !important;
+  background: $gradient-reverse !important;
 }
 
 .taskbar-button[disabled] {

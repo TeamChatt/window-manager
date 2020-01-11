@@ -4,6 +4,7 @@ module.exports = {
   output: {
     libraryTarget: 'umd',
   },
+  devtool: "source-map",
   externals: {
     react: {
       root: 'React',

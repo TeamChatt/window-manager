@@ -44,10 +44,10 @@ export const WindowManager = ({
         <WMTaskbarButton
           key={id}
           id={id}
-          active={state.visibility === 'open'}
+          active={state.visibility === 'open' && state.isFocused}
           hasOutline={state.visibility === 'minimized'}
           onClick={
-            state.visibility === 'open' ? actions.minimize : actions.open
+            state.visibility === 'open' && state.order === windows.length ? actions.minimize : actions.open
           }
         >
           {title}
