@@ -41,7 +41,9 @@ $icon-size: 48px;
   padding: $space-inset-xxs;
   color: $color--text-inverse;
   font-size: $font-size-s;
-  text-shadow: 0 1px transparentize($color-black, 0.5);
+  text-shadow:
+    0 1px transparentize($color-black, 0.5),
+    0 0 3px transparentize($color-black, 0.5);
 
   .file-grid-item:focus & {
     background: $color-blue-6;
