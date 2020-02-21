@@ -14,6 +14,38 @@ const transitionClassNames = {
   'enter-done':   cx('appear--enter-done'),
 }
 
+const useWindowFocus = (ref, { isFocused, onFocus, onBlur }) => {
+  const isFocusedRef = useRef()
+  isFocusedRef.current = isFocused
+
+  useEffect(() => {
+    if(isFocused && !ref.current.contains(document.activeElement)) {
+      ref.current.focus()
+    }
+  }, [isFocused])
+
+  useEffect(() => {
+    const handleFocus = () => {
+      window.setTimeout(() => {
+        const isActive = ref.current.contains(document.activeElement) || ref.current === document.activeElement
+        const isFocused = isFocusedRef.current
+        if (isFocused && !isActive) {
+          onBlur()
+        }
+        if (!isFocused && isActive) {
+          onFocus()
+        }
+      }, 0)
+    }
+    document.addEventListener('focusout', handleFocus)
+    document.addEventListener('focusin', handleFocus)
+    return () => {
+      document.removeEventListener('focusout', handleFocus)
+      document.removeEventListener('focusin', handleFocus)
+    }
+  }, [])
+}
+
 export const WMWindow = ({
   id,
   title,
@@ -31,19 +63,7 @@ export const WMWindow = ({
   const transitionClassName = useCSSAnimation(shadowRef, true, transitionClassNames)
 
   const frameRef = useRef()
-  useEffect(() => {
-    if(isFocused && !frameRef.current.contains(document.activeElement)) {
-      frameRef.current.focus()
-    }
-  }, [isFocused])
-
-  const onBlurFrame = () => {
-    window.setTimeout(() => {
-      if(!frameRef.current.contains(document.activeElement)) {
-        onBlur()
-      }
-    }, 0)
-  }
+  useWindowFocus(frameRef, { isFocused, onFocus, onBlur })
 
   const { onDragStart, onDrag, onDragEnd } = useDragWindow(position, onMove)
   const style = {
@@ -56,8 +76,6 @@ export const WMWindow = ({
       className={cx('window-frame')}
       style={style}
       ref={frameRef}
-      onFocus={onFocus}
-      onBlur={onBlurFrame}
       tabIndex="0"
     >
       <Window
