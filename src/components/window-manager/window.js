@@ -37,6 +37,14 @@ export const WMWindow = ({
     }
   }, [isFocused])
 
+  const onBlurFrame = () => {
+    window.setTimeout(() => {
+      if(!frameRef.current.contains(document.activeElement)) {
+        onBlur()
+      }
+    }, 0)
+  }
+
   const { onDragStart, onDrag, onDragEnd } = useDragWindow(position, onMove)
   const style = {
     zIndex: order,
@@ -49,7 +57,7 @@ export const WMWindow = ({
       style={style}
       ref={frameRef}
       onFocus={onFocus}
-      onBlur={onBlur}
+      onBlur={onBlurFrame}
       tabIndex="0"
     >
       <Window
