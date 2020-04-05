@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useContext } from 'react'
 
 import { AnimationContainer } from '/components/generic/animation'
 import { FileGrid } from '/components/file-grid'
@@ -11,6 +11,10 @@ import { WMTaskbarButton } from './taskbar-button'
 import styles from './manager.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
+
+const WindowContext = createContext()
+
+export const useWindowContext = () => useContext(WindowContext)
 
 export const WindowManager = ({
   background,
@@ -62,7 +66,9 @@ export const WindowManager = ({
           <div className={cx('window-manager_layer-group')}>
             <div className={cx('window-manager_layer')}>
               <Desktop background={background}>
-                <FileGrid>{desktopItems}</FileGrid>
+                <WindowContext.Provider value={windows}>
+                  <FileGrid>{desktopItems}</FileGrid>
+                </WindowContext.Provider>
               </Desktop>
             </div>
             <div className={cx('window-manager_layer')}>{windowItems}</div>

@@ -14,6 +14,7 @@ $header-gradient: linear-gradient(
   display: flex;
   flex: 1;
   flex-direction: column;
+  max-width: 100%;
 
   border: $os-border-style-window--fade;
   border-top-right-radius: $border-radius-m;

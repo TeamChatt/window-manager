@@ -73,14 +73,12 @@ const ExampleApp = () => {
         icon={folder}
         label="Pictures"
         id="pictures"
-        hasOutline={windowState.pictures.visibility === 'closed'}
         onDoubleClick={windowActions.pictures.open}
       />
       <WMFileGridItem
         icon={folder}
         label="Music"
         id="music"
-        hasOutline={windowState.music.visibility === 'closed'}
         onDoubleClick={windowActions.music.open}
       />
     </>
