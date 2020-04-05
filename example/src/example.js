@@ -1,14 +1,37 @@
 import React, { useState } from 'react'
-import { useWindowState, WindowManager, WMFileGridItem } from 'window-manager'
+import {
+  useWindowState,
+  WindowManager,
+  WMFileGridItem,
+  WMFileGrid,
+} from 'window-manager'
 
 import background from '../images/touhou-wings.jpg'
 import folder from '../images/folder.png'
+import image from '../images/image.png'
+
+const PicturesFolder = () => (
+  <WMFileGrid>
+    <WMFileGridItem
+      icon={image}
+      label="Picture1.jpg"
+      id="picture1"
+      onDoubleClick={() => {}}
+    />
+    <WMFileGridItem
+      icon={image}
+      label="Picture2.jpg"
+      id="picture2"
+      onDoubleClick={() => {}}
+    />
+  </WMFileGrid>
+)
 
 const ExampleApp = () => {
   const [count, setCount] = useState(0)
   const counter = (
     <div>
-      <button onClick={() => setCount(c => c + 1)}>{count}</button>
+      <button onClick={() => setCount((c) => c + 1)}>{count}</button>
     </div>
   )
 
@@ -54,7 +77,7 @@ const ExampleApp = () => {
     {
       id: 'pictures',
       title: 'Pictures',
-      content: <div>Pictures</div>,
+      content: <PicturesFolder />,
       state: windowState.pictures,
       actions: windowActions.pictures,
     },

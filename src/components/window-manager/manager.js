@@ -1,16 +1,10 @@
 import React, { createContext, useContext } from 'react'
 
+import { Manager } from '/components/manager'
 import { AnimationContainer } from '/components/generic/animation'
-import { FileGrid } from '/components/file-grid'
-import { Desktop } from '/components/desktop'
-import { Taskbar } from '/components/taskbar'
 import { BSODErrorBoundary } from '/components/blue-screen-of-death'
 import { WMWindow } from './window'
 import { WMTaskbarButton } from './taskbar-button'
-
-import styles from './manager.scss'
-import classnames from 'classnames/bind'
-const cx = classnames.bind(styles)
 
 const WindowContext = createContext()
 
@@ -51,7 +45,9 @@ export const WindowManager = ({
           active={state.visibility === 'open' && state.isFocused}
           hasOutline={state.visibility === 'minimized'}
           onClick={
-            state.visibility === 'open' && state.order === windows.length ? actions.minimize : actions.open
+            state.visibility === 'open' && state.order === windows.length
+              ? actions.minimize
+              : actions.open
           }
         >
           {title}
@@ -62,22 +58,15 @@ export const WindowManager = ({
   return (
     <BSODErrorBoundary>
       <AnimationContainer>
-        <div className={cx('window-manager')}>
-          <div className={cx('window-manager_layer-group')}>
-            <div className={cx('window-manager_layer')}>
-              <Desktop background={background}>
-                <WindowContext.Provider value={windows}>
-                  <FileGrid>{desktopItems}</FileGrid>
-                </WindowContext.Provider>
-              </Desktop>
-            </div>
-            <div className={cx('window-manager_layer')}>{windowItems}</div>
-          </div>
-          <Taskbar>
-            {taskbarItems}
-            {taskbarExtras}
-          </Taskbar>
-        </div>
+        <WindowContext.Provider value={windows}>
+          <Manager
+            background={background}
+            desktopItems={desktopItems}
+            windowItems={windowItems}
+            taskbarItems={taskbarItems}
+            taskbarExtras={taskbarExtras}
+          />
+        </WindowContext.Provider>
       </AnimationContainer>
     </BSODErrorBoundary>
   )

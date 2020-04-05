@@ -7,8 +7,14 @@ $item-size: 72px;
   flex: 1;
   padding: $space-inset-l;
   display: grid;
-  grid-auto-flow: column;
   grid-template-rows: repeat(auto-fill, $item-size);
   grid-template-columns: repeat(auto-fill, $item-size);
   grid-gap: $space-l;
+}
+
+.file-grid--row {
+  grid-auto-flow: row;
+}
+.file-grid--column {
+  grid-auto-flow: column;
 }

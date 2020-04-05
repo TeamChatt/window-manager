@@ -39,13 +39,25 @@ $icon-size: 48px;
 .file-grid-item_label {
   display: block;
   padding: $space-inset-xxs;
-  color: $color--text-inverse;
   font-size: $font-size-s;
-  text-shadow:
-    0 1px transparentize($color-black, 0.5),
-    0 0 3px transparentize($color-black, 0.5);
 
   .file-grid-item:focus & {
     background: $color-blue-6;
+    color: $color--text-inverse;
+    text-shadow:
+      0 1px transparentize($color-black, 0.5),
+      0 0 3px transparentize($color-black, 0.5);
+  }
+}
+
+.file-grid-item_label {
+  .file-grid-item--light & {
+    color: $color--text-inverse;
+    text-shadow:
+      0 1px transparentize($color-black, 0.5),
+      0 0 3px transparentize($color-black, 0.5);
+  }
+  .file-grid-item--dark & {
+    color: $color--text-standard;
   }
 }
