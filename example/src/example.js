@@ -10,21 +10,46 @@ import background from '../images/touhou-wings.jpg'
 import folder from '../images/folder.png'
 import image from '../images/image.png'
 
-const PicturesFolder = () => (
+import picture1 from '../images/avatar-01.png'
+import picture2 from '../images/avatar-02.png'
+import picture3 from '../images/avatar-03.png'
+
+const PicturesFolder = ({ onOpenPicture }) => (
   <WMFileGrid>
     <WMFileGridItem
       icon={image}
-      label="Picture1.jpg"
+      label="picture-1.jpg"
       id="picture1"
-      onDoubleClick={() => {}}
+      onDoubleClick={() => onOpenPicture('picture1', picture1)}
     />
     <WMFileGridItem
       icon={image}
-      label="Picture2.jpg"
+      label="picture-2.jpg"
       id="picture2"
-      onDoubleClick={() => {}}
+      onDoubleClick={() => onOpenPicture('picture2', picture2)}
+    />
+    <WMFileGridItem
+      icon={image}
+      label="picture-3.png"
+      id="picture3"
+      onDoubleClick={() => onOpenPicture('picture3', picture3)}
     />
   </WMFileGrid>
+)
+
+const PictureWindow = ({ picture }) => (
+  <div
+    style={{
+      display: 'flex',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: 200,
+      background: 'black'
+    }}
+  >
+    <img src={picture} alt="" />
+  </div>
 )
 
 const ExampleApp = () => {
@@ -46,49 +71,79 @@ const ExampleApp = () => {
         height: '80vh',
       },
     },
-    pictures: {
-      visibility: 'closed',
+  })
+
+  const openPictureWindow = (id, picture) => {
+    windowActions.openWindow(id, {
+      data: { picture },
+      position: {
+        top: 90,
+        left: 320,
+        width: 'auto',
+        height: 'auto',
+      },
+    })
+  }
+  const openPicturesFolder = () => {
+    windowActions.openWindow('pictures', {
       position: {
         top: 80,
         left: 300,
         width: 600,
         height: '50vh',
       },
-    },
-    music: {
-      visibility: 'closed',
+    })
+  }
+  const openMusicFolder = () => {
+    windowActions.openWindow('music', {
       position: {
         top: 110,
         left: 400,
         width: 600,
         height: '50vh',
       },
-    },
-  })
+    })
+  }
 
-  const windows = [
-    {
-      id: 'chat',
-      title: 'Chat',
-      content: counter,
-      state: windowState.chat,
-      actions: windowActions.chat,
-    },
-    {
-      id: 'pictures',
-      title: 'Pictures',
-      content: <PicturesFolder />,
-      state: windowState.pictures,
-      actions: windowActions.pictures,
-    },
-    {
-      id: 'music',
-      title: 'Music',
-      content: <div>Music</div>,
-      state: windowState.music,
-      actions: windowActions.music,
-    },
-  ]
+  const renderWindow = ({ id, state }) => {
+    switch (id) {
+      case 'chat':
+        return {
+          title: 'Chat',
+          content: counter,
+        }
+      case 'pictures':
+        return {
+          title: 'Pictures',
+          content: <PicturesFolder onOpenPicture={openPictureWindow} />,
+        }
+      case 'music':
+        return {
+          title: 'Music',
+          content: <div>Music</div>,
+        }
+      case 'picture1':
+      case 'picture2':
+      case 'picture3':
+        return {
+          title: 'Picture',
+          content: <PictureWindow picture={state.data.picture} />,
+        }
+    }
+  }
+
+  const windows = Object.keys(windowState).map(id => {
+    const state = windowState[id]
+    const actions = windowActions.window[id]
+    
+    const window = renderWindow({ id, state, actions })
+    return {
+      id,
+      state,
+      actions,
+      ...window,
+    }
+  })
 
   const desktopItems = (
     <>
@@ -96,13 +151,13 @@ const ExampleApp = () => {
         icon={folder}
         label="Pictures"
         id="pictures"
-        onDoubleClick={windowActions.pictures.open}
+        onDoubleClick={openPicturesFolder}
       />
       <WMFileGridItem
         icon={folder}
         label="Music"
         id="music"
-        onDoubleClick={windowActions.music.open}
+        onDoubleClick={openMusicFolder}
       />
     </>
   )
