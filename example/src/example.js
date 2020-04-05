@@ -7,35 +7,33 @@ import {
 } from 'window-manager'
 
 import background from '../images/touhou-wings.jpg'
-import folder from '../images/folder.png'
-import image from '../images/image.png'
+import folderIcon from '../images/folder.png'
+import imageIcon from '../images/image.png'
+import chatIcon from '../images/chat.png'
+import textIcon from '../images/text-file.png'
 
 import picture1 from '../images/avatar-01.png'
 import picture2 from '../images/avatar-02.png'
 import picture3 from '../images/avatar-03.png'
 
-const PicturesFolder = ({ onOpenPicture }) => (
-  <WMFileGrid>
+
+const iconTypes = {
+  'application/chat': chatIcon,
+  'file/image': imageIcon,
+  'file/document': textIcon,
+  'folder': folderIcon,
+}
+const FSItem = ({ fsItem, onOpenItem }) => {
+  const { id, label, type } = fsItem
+  return (
     <WMFileGridItem
-      icon={image}
-      label="picture-1.jpg"
-      id="picture1"
-      onDoubleClick={() => onOpenPicture('picture1', picture1)}
+      icon={iconTypes[type]}
+      label={label}
+      id={id}
+      onDoubleClick={() => onOpenItem(fsItem)}
     />
-    <WMFileGridItem
-      icon={image}
-      label="picture-2.jpg"
-      id="picture2"
-      onDoubleClick={() => onOpenPicture('picture2', picture2)}
-    />
-    <WMFileGridItem
-      icon={image}
-      label="picture-3.png"
-      id="picture3"
-      onDoubleClick={() => onOpenPicture('picture3', picture3)}
-    />
-  </WMFileGrid>
-)
+  )
+}
 
 const PictureWindow = ({ picture }) => (
   <div
@@ -52,6 +50,62 @@ const PictureWindow = ({ picture }) => (
   </div>
 )
 
+const TextWindow = ({ text }) => (
+  <div style={{ whiteSpace: 'pre-wrap', minHeight: 300 }}>
+    {text}
+  </div>
+)
+
+const FolderWindow = ({ fsItems, onOpenItem }) => (
+  <WMFileGrid>
+    {fsItems.map((fsItem) => (
+      <FSItem key={fsItem.id} fsItem={fsItem} onOpenItem={onOpenItem} />
+    ))}
+  </WMFileGrid>
+)
+
+
+const fsItems = [
+  { id: 'chat', label: 'Chat', type: 'application/chat' },
+  {
+    id: 'pictures',
+    label: 'Pictures',
+    type: 'folder',
+    contents: [
+      {
+        id: 'picture1',
+        label: 'picture-1.png',
+        type: 'file/image',
+        file: picture1,
+      },
+      {
+        id: 'picture2',
+        label: 'picture-2.png',
+        type: 'file/image',
+        file: picture2,
+      },
+      {
+        id: 'picture3',
+        label: 'picture-3.png',
+        type: 'file/image',
+        file: picture3,
+      },
+    ],
+  },
+  {
+    id: 'documents',
+    label: 'Documents',
+    type: 'folder',
+    contents: [
+      {
+        id: 'document1',
+        label: 'document-1.txt',
+        type: 'file/document',
+        file: 'Hello, World!',
+      },
+    ],
+  },
+]
 const ExampleApp = () => {
   const [count, setCount] = useState(0)
   const counter = (
@@ -62,6 +116,7 @@ const ExampleApp = () => {
 
   const [windowState, windowActions] = useWindowState({
     chat: {
+      data: { id: 'chat', label: 'Chat', type: 'application/chat' },
       visibility: 'open',
       isFocused: true,
       position: {
@@ -73,70 +128,95 @@ const ExampleApp = () => {
     },
   })
 
-  const openPictureWindow = (id, picture) => {
-    windowActions.openWindow(id, {
-      data: { picture },
-      position: {
-        top: 90,
-        left: 320,
-        width: 'auto',
-        height: 'auto',
-      },
-    })
-  }
-  const openPicturesFolder = () => {
-    windowActions.openWindow('pictures', {
-      position: {
-        top: 80,
-        left: 300,
-        width: 600,
-        height: '50vh',
-      },
-    })
-  }
-  const openMusicFolder = () => {
-    windowActions.openWindow('music', {
-      position: {
-        top: 110,
-        left: 400,
-        width: 600,
-        height: '50vh',
-      },
-    })
+  const onOpenItem = (fsItem) => {
+    switch (fsItem.type) {
+      case 'application/chat': {
+        windowActions.openWindow(fsItem.id, {
+          data: fsItem,
+          position: {
+            top: 50,
+            left: 200,
+            width: 600,
+            height: '80vh',
+          },
+        })
+        return
+      }
+      case 'file/image': {
+        windowActions.openWindow(fsItem.id, {
+          data: fsItem,
+          position: {
+            top: 90,
+            left: 320,
+            width: 'auto',
+            height: 'auto',
+          },
+        })
+        return
+      }
+      case 'file/document': {
+        windowActions.openWindow(fsItem.id, {
+          data: fsItem,
+          position: {
+            top: 120,
+            left: 380,
+            width: 'auto',
+            height: 'auto',
+          },
+        })
+        return
+      }
+      case 'folder': {
+        windowActions.openWindow(fsItem.id, {
+          data: fsItem,
+          position: {
+            top: 80,
+            left: 300,
+            width: 600,
+            height: '50vh',
+          },
+        })
+        return
+      }
+    }
   }
 
-  const renderWindow = ({ id, state }) => {
-    switch (id) {
-      case 'chat':
+  const renderWindow = (fsItem) => {
+    switch (fsItem.type) {
+      case 'application/chat': {
         return {
           title: 'Chat',
           content: counter,
         }
-      case 'pictures':
+      }
+      case 'file/image': {
         return {
-          title: 'Pictures',
-          content: <PicturesFolder onOpenPicture={openPictureWindow} />,
+          title: `Picture Viewer - ${fsItem.label}`,
+          content: <PictureWindow picture={fsItem.file} />,
         }
-      case 'music':
+      }
+      case 'file/document': {
         return {
-          title: 'Music',
-          content: <div>Music</div>,
+          title: `Notepad - ${fsItem.label}`,
+          content: <TextWindow text={fsItem.file} />,
         }
-      case 'picture1':
-      case 'picture2':
-      case 'picture3':
+      }
+      case 'folder': {
         return {
-          title: 'Picture',
-          content: <PictureWindow picture={state.data.picture} />,
+          title: fsItem.label,
+          content: (
+            <FolderWindow fsItems={fsItem.contents} onOpenItem={onOpenItem} />
+          ),
         }
+      }
     }
   }
 
   const windows = Object.keys(windowState).map(id => {
     const state = windowState[id]
     const actions = windowActions.window[id]
-    
-    const window = renderWindow({ id, state, actions })
+    const fsItem = state.data
+    const window = renderWindow(fsItem)
     return {
       id,
       state,
@@ -147,18 +227,9 @@ const ExampleApp = () => {
 
   const desktopItems = (
     <>
-      <WMFileGridItem
-        icon={folder}
-        label="Pictures"
-        id="pictures"
-        onDoubleClick={openPicturesFolder}
-      />
-      <WMFileGridItem
-        icon={folder}
-        label="Music"
-        id="music"
-        onDoubleClick={openMusicFolder}
-      />
+      {fsItems.map((fsItem) => (
+        <FSItem key={fsItem.id} fsItem={fsItem} onOpenItem={onOpenItem} />
+      ))}
     </>
   )
 
