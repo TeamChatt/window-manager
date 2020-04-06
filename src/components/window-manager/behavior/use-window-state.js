@@ -25,7 +25,7 @@ const reorderWindows = (from, to) => state => {
   return mapObject(state, (key, window) => reorderWindow(window))
 }
 const autoPosition = (state) => {
-  const topId = topWindow(state)
+  const topId = topWindow(state) || -1
   const topPosition = pathLens(topId, 'position').get(state)
   return topPosition
     ? {
@@ -41,10 +41,8 @@ const autoPosition = (state) => {
 
 const initializeWindow = (key, window, i) => ({
   position: {
-    top: 50,
+    top: 50 + i * 50,
     left: 200 + i * 100,
-    width: 'auto',
-    height: 'auto',
   },
   visibility: 'closed',
   ...window,

@@ -25,6 +25,7 @@ export const WindowManager = ({
           title={title}
           order={state.order}
           position={state.position}
+          dimensions={state.dimensions}
           isFocused={state.isFocused}
           onMinimize={actions.minimize}
           onClose={actions.close}

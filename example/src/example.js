@@ -57,11 +57,13 @@ const TextWindow = ({ text }) => (
 )
 
 const FolderWindow = ({ fsItems, onOpenItem }) => (
-  <WMFileGrid>
-    {fsItems.map((fsItem) => (
-      <FSItem key={fsItem.id} fsItem={fsItem} onOpenItem={onOpenItem} />
-    ))}
-  </WMFileGrid>
+  <div style={{width: 400, height: 250 }}>
+    <WMFileGrid>
+      {fsItems.map((fsItem) => (
+        <FSItem key={fsItem.id} fsItem={fsItem} onOpenItem={onOpenItem} />
+      ))}
+    </WMFileGrid>
+  </div>
 )
 
 
@@ -119,9 +121,7 @@ const ExampleApp = () => {
       data: { id: 'chat', label: 'Chat', type: 'application/chat' },
       visibility: 'open',
       isFocused: true,
-      position: {
-        top: 50,
-        left: 200,
+      dimensions: {
         width: 600,
         height: '80vh',
       },
@@ -133,9 +133,7 @@ const ExampleApp = () => {
       case 'application/chat': {
         windowActions.openWindow(fsItem.id, {
           data: fsItem,
-          position: {
-            top: 50,
-            left: 200,
+          dimensions: {
             width: 600,
             height: '80vh',
           },
@@ -157,12 +155,6 @@ const ExampleApp = () => {
       case 'folder': {
         windowActions.openWindow(fsItem.id, {
           data: fsItem,
-          position: {
-            top: 80,
-            left: 300,
-            width: 600,
-            height: '50vh',
-          },
         })
         return
       }

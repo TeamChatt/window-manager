@@ -52,6 +52,7 @@ export const WMWindow = ({
   children,
   order,
   position,
+  dimensions,
   isFocused,
   onMinimize,
   onClose,
@@ -69,6 +70,7 @@ export const WMWindow = ({
   const style = {
     zIndex: order,
     ...position,
+    ...dimensions,
   }
 
   return (
