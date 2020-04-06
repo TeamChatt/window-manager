@@ -32,15 +32,20 @@ export const emptyLens = {
 }
 export const safeLens = (lens, d) => ({
   get: s => {
-    const x = lens.get(s)
-    return x === undefined ? d : x
+    try {
+      return lens.get(s)
+    } catch (e) {
+      return d
+    }
   },
   set: lens.set,
   name: `safe(${lens.name})`,
 })
-export const pathLens = (...args) =>
-  args
+export const pathLens = (...args) => {
+  const path = args
     .map(l => (typeof l === 'number' ? indexLens(l) : propertyLens(l)))
     .reduce(composeLens, idLens)
+  return safeLens(path, undefined)
+}
 
 export const modifyAt = (lens, f) => s => lens.set(s, f(lens.get(s)))

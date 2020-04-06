@@ -24,6 +24,19 @@ const reorderWindows = (from, to) => state => {
   const reorderWindow = modifyAt(pathLens('order'), reorder(from, to))
   return mapObject(state, (key, window) => reorderWindow(window))
 }
+const autoPosition = (state) => {
+  const topId = topWindow(state)
+  const topPosition = pathLens(topId, 'position').get(state)
+  return topPosition
+    ? {
+        left: topPosition.left + 40,
+        top: topPosition.top + 20,
+      }
+    : {
+        left: 200,
+        top: 100,
+      }
+}
 
 
 const initializeWindow = (key, window, i) => ({
@@ -55,10 +68,10 @@ const topReducer = (state, { type, id, window }) => {
   const windowLens = pathLens(id)
   switch (type) {
     case 'top.create': {
-      const topId = topWindow(state)
-      return modifyAt(windowLens, () =>
-        initializeWindow(id, window, topId)
-      )(state)
+      const order = Object.keys(state).length
+      const position = autoPosition(state)
+      const newWindow = initializeWindow(id, { position, ...window }, order)
+      return windowLens.set(state, newWindow)
     }
     case 'top.destroy': {
       const newState = { ...state }
@@ -121,6 +134,7 @@ const useWindowState = initialState => {
     },
     close: () => {
       dispatch({ type: 'window.close', id })
+      dispatch({ type: 'window.blur', id })
       dispatch({ type: 'window.focusNext' })
     },
     minimize: () => {
@@ -168,7 +182,6 @@ const useWindowState = initialState => {
     window: useMemo(() => mapObject(state, windowActions), [numWindows])
   }
 
-  console.log(state)
   return [state, actions]
 }
 

@@ -145,20 +145,12 @@ const ExampleApp = () => {
       case 'file/image': {
         windowActions.openWindow(fsItem.id, {
           data: fsItem,
-          position: {
-            top: 90,
-            left: 320,
-          },
         })
         return
       }
       case 'file/document': {
         windowActions.openWindow(fsItem.id, {
           data: fsItem,
-          position: {
-            top: 120,
-            left: 380,
-          },
         })
         return
       }
