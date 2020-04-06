@@ -148,8 +148,6 @@ const ExampleApp = () => {
           position: {
             top: 90,
             left: 320,
-            width: 'auto',
-            height: 'auto',
           },
         })
         return
@@ -160,8 +158,6 @@ const ExampleApp = () => {
           position: {
             top: 120,
             left: 380,
-            width: 'auto',
-            height: 'auto',
           },
         })
         return

@@ -27,14 +27,15 @@ const reorderWindows = (from, to) => state => {
 
 
 const initializeWindow = (key, window, i) => ({
-  order: i+1,
   position: {
     top: 50,
     left: 200 + i * 100,
-    width: 600,
-    height: '80vh',
+    width: 'auto',
+    height: 'auto',
   },
+  visibility: 'closed',
   ...window,
+  order: i+1,
 })
 const initialize = state => {
   return mapObject(state, initializeWindow)
@@ -142,11 +143,15 @@ const useWindowState = initialState => {
       dispatch({ type: 'window.focusNext' })
     }
   }
-  const openWindow = (id, window) => {
+  const openWindow = async (id, window) => {
     if(state[id] === undefined) {
       createWindow(id, window)
+      setTimeout(() => {
+        windowActions(id).open()
+      }, 0)
+    } else {
+      windowActions(id).open()
     }
-    windowActions(id).open()
   }
   const closeWindow = (id) => {
     if(state[id] !== undefined) {
@@ -163,6 +168,7 @@ const useWindowState = initialState => {
     window: useMemo(() => mapObject(state, windowActions), [numWindows])
   }
 
+  console.log(state)
   return [state, actions]
 }
 
