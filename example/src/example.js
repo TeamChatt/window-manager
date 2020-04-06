@@ -129,36 +129,9 @@ const ExampleApp = () => {
   })
 
   const onOpenItem = (fsItem) => {
-    switch (fsItem.type) {
-      case 'application/chat': {
-        windowActions.openWindow(fsItem.id, {
-          data: fsItem,
-          dimensions: {
-            width: 600,
-            height: '80vh',
-          },
-        })
-        return
-      }
-      case 'file/image': {
-        windowActions.openWindow(fsItem.id, {
-          data: fsItem,
-        })
-        return
-      }
-      case 'file/document': {
-        windowActions.openWindow(fsItem.id, {
-          data: fsItem,
-        })
-        return
-      }
-      case 'folder': {
-        windowActions.openWindow(fsItem.id, {
-          data: fsItem,
-        })
-        return
-      }
-    }
+    windowActions.openWindow(fsItem.id, {
+      data: fsItem,
+    })
   }
 
   const renderWindow = (fsItem) => {
