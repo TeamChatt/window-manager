@@ -62,7 +62,7 @@ const reducer = (state, action) => {
   }
   return state
 }
-const topReducer = (state, { type, id, window }) => {
+const topReducer = (state, { type, id, window, newState }) => {
   const windowLens = pathLens(id)
   switch (type) {
     case 'top.create': {
@@ -75,6 +75,15 @@ const topReducer = (state, { type, id, window }) => {
       const newState = { ...state }
       delete newState[id]
       return newState
+    }
+    case 'top.focusNext': {
+      const topId = topWindow(state)
+      return topId
+        ? pathLens(topId, 'isFocused').set(state, true)
+        : state
+    }
+    case 'top.reset': {
+      return initializeWindow(newState)
     }
   }
 }
@@ -103,12 +112,6 @@ const windowReducer = (state, { type, id, position }) => {
       const to   = Object.keys(state).length
       return reorderWindows(from, to)(state)
     }
-    case 'window.focusNext': {
-      const topId = topWindow(state)
-      return topId
-        ? pathLens(topId, 'isFocused').set(state, true)
-        : state
-    }
   }
 }
 
@@ -133,11 +136,11 @@ const useWindowState = initialState => {
     close: () => {
       dispatch({ type: 'window.close', id })
       dispatch({ type: 'window.blur', id })
-      dispatch({ type: 'window.focusNext' })
+      dispatch({ type: 'top.focusNext' })
     },
     minimize: () => {
       dispatch({ type: 'window.minimize', id })
-      dispatch({ type: 'window.focusNext' })
+      dispatch({ type: 'top.focusNext' })
     },
     blur: () => dispatch({ type: 'window.blur', id }),
     move: (position) => dispatch({ type: 'window.move', id, position }),
@@ -152,7 +155,7 @@ const useWindowState = initialState => {
   const destroyWindow = (id) => {
     if(state[id] !== undefined) {
       dispatch({ type: 'top.destroy', id })
-      dispatch({ type: 'window.focusNext' })
+      dispatch({ type: 'top.focusNext' })
     }
   }
   const openWindow = async (id, window) => {
@@ -170,6 +173,9 @@ const useWindowState = initialState => {
       windowActions(id).close()
     }
   }
+  const reset = state => {
+    dispatch({ type: 'top.reset', newState: state })
+  }
 
   const numWindows = Object.keys(state).length
   const actions = {
@@ -177,6 +183,7 @@ const useWindowState = initialState => {
     destroyWindow,
     openWindow,
     closeWindow,
+    reset,
     window: useMemo(() => mapObject(state, windowActions), [numWindows])
   }
 
