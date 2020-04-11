@@ -83,7 +83,7 @@ const topReducer = (state, { type, id, window, newState }) => {
         : state
     }
     case 'top.reset': {
-      return initializeWindow(newState)
+      return initialize(newState)
     }
   }
 }
