@@ -17,7 +17,7 @@ export const FileGridItem = ({ onDoubleClick, icon, label }) => {
       onDoubleClick={onDoubleClick}
     >
       <div className={cx('file-grid-item_inner')}>
-        <img className={cx('file-grid-item_icon')} src={icon} />
+        <img className={cx('file-grid-item_icon')} src={icon} draggable="false" />
         <span className={cx('file-grid-item_label')}>{label}</span>
       </div>
     </button>

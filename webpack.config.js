@@ -39,13 +39,11 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName:
-                  process.env.NODE_ENV === 'development'
-                    ? '[path][name]__[local]--[hash:base64:5]'
-                    : '[hash:base64]',
+                localIdentName: '[local]--[hash:base64:5]',
               },
             },
           },
+          'postcss-loader',
           'sass-loader',
         ],
       },
