@@ -112,7 +112,6 @@ const ExampleApp = () => {
   const [count, setCount] = useState(0)
   const counter = (
     <div>
-      Selectable text
       <button onClick={() => setCount((c) => c + 1)}>{count}</button>
     </div>
   )
