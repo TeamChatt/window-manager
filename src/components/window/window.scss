@@ -60,7 +60,11 @@ $header-gradient: linear-gradient(
   display: flex;
   flex: 1;
   overflow: hidden;
-  user-select: text;
+  user-select: none;
+
+  .window--focused & {
+    user-select: text;
+  }
 }
 
 

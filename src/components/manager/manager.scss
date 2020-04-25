@@ -2,7 +2,7 @@
 
 .window-manager {
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr min-content;
   height: 100vh;
   overflow: hidden;
 }
@@ -13,8 +13,6 @@
 
 .window-manager_layer {
   display: flex;
-  justify-content: center;
-  align-items: stretch;
   pointer-events: none;
   overflow: hidden;
 

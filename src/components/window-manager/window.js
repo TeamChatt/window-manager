@@ -19,15 +19,17 @@ const useWindowFocus = (ref, { isFocused, onFocus, onBlur }) => {
   isFocusedRef.current = isFocused
 
   useEffect(() => {
-    if(isFocused && !ref.current.contains(document.activeElement)) {
-      ref.current.focus()
+    if (isFocused && !ref.current.contains(document.activeElement)) {
+      ref.current.focus({ preventScroll: true })
     }
   }, [isFocused])
 
   useEffect(() => {
     const handleFocus = () => {
       window.setTimeout(() => {
-        const isActive = ref.current.contains(document.activeElement) || ref.current === document.activeElement
+        const isActive =
+          ref.current.contains(document.activeElement) ||
+          ref.current === document.activeElement
         const isFocused = isFocusedRef.current
         if (isFocused && !isActive) {
           onBlur()
