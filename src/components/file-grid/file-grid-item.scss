@@ -19,7 +19,6 @@ $icon-size: 48px;
 .file-grid-item_inner {
   display: grid;
   width: $item-size;
-  height: $item-size;
   grid-template-rows: $icon-size auto;
   grid-gap: $space-xs;
   
