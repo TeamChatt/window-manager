@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/TeamChatt/window-manager.git"
   },
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Throwback Windows-XP style react components",
   "main": "dist/main.js",
   "scripts": {
