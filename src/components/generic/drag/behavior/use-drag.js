@@ -34,9 +34,10 @@ const useDrag = ({ onDragStart = noop, onDrag = noop, onDragEnd = noop }) => {
     if (isDragging) {
       window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('mouseup', handleMouseUp)
-    } else {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseup', handleMouseUp)
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove)
+        window.removeEventListener('mouseup', handleMouseUp)
+      }
     }
   }, [isDragging, handleMouseMove, handleMouseUp])
 
