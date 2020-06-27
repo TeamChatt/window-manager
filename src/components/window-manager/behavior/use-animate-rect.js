@@ -32,7 +32,7 @@ const makeCSSAnimation = (receive) => async function * (from, to) {
 }
 const noAnimation = async function*(){}
 
-const useAnimateRect = (id, ref) => {
+export const useAnimateRect = (id, ref) => {
   const [rect, setRect] = useState(originRect)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -54,5 +54,3 @@ const useAnimateRect = (id, ref) => {
 
   return { rect, isAnimating }
 }
-
-export default useAnimateRect

@@ -1,7 +1,7 @@
 import { useCallback, useRef, createRef } from 'react'
 import { makeCursor } from '/utils/array-cursor'
 
-const useChildRefs = () => {
+export const useChildRefs = () => {
   const itemRefs = useRef({})
 
   const refAt = (lens) => lens.get(itemRefs.current)
@@ -32,5 +32,3 @@ const useChildRefs = () => {
 
   return makeContext
 }
-
-export default useChildRefs

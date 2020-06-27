@@ -115,7 +115,7 @@ const windowReducer = (state, { type, id, position }) => {
   }
 }
 
-const useWindowState = initialState => {
+export const useWindowState = initialState => {
   const [state, dispatch] = useReducer(
     reducer,
     initialState,
@@ -189,5 +189,3 @@ const useWindowState = initialState => {
 
   return [state, actions]
 }
-
-export default useWindowState

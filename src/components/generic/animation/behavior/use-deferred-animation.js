@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import runAsyncProcess from '/utils/run-async'
-import useAnimation from './use-animation'
-import AnimationContext from '../context'
+import { useAnimation } from './use-animation'
+import { AnimationContext } from '../context'
 
 const makeSurrogate = (el) => {
   const rect = el.getBoundingClientRect()
@@ -10,7 +10,7 @@ const makeSurrogate = (el) => {
   }
 }
 
-const useDeferredAnimation = (id, ref, inProp, receive, send) => {
+export const useDeferredAnimation = (id, ref, inProp, receive, send) => {
   const animationCoordinator = useContext(AnimationContext)
 
   const animateIn = async function * (){
@@ -36,5 +36,3 @@ const useDeferredAnimation = (id, ref, inProp, receive, send) => {
     }
   }, [])
 }
-
-export default useDeferredAnimation

@@ -1,1 +1,1 @@
-export { default as Desktop } from './desktop'
+export { Desktop } from './desktop'

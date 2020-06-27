@@ -44,4 +44,4 @@ class AnimationCoordinator {
   }
 }
 
-export default AnimationCoordinator.create
+export const makeAnimationCoordinator = AnimationCoordinator.create

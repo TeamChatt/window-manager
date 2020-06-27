@@ -13,7 +13,7 @@ const focusPrev = (cursor) => {
   }
 }
 
-const useFocus = (ref) => {
+export const useFocus = (ref) => {
   const [ isFocused, setIsFocused ] = useState(false)
 
   const cursor = useCursor(() => ({
@@ -47,5 +47,3 @@ const useFocus = (ref) => {
     onKeyDown,
   }
 }
-
-export default useFocus

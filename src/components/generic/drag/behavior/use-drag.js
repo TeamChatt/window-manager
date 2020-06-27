@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react'
 const ORIGIN = { left: 0, top: 0 }
 const noop = () => {}
 
-const useDrag = ({ onDragStart = noop, onDrag = noop, onDragEnd = noop }) => {
+export const useDrag = ({ onDragStart = noop, onDrag = noop, onDragEnd = noop }) => {
   const [dragOrigin, setDragOrigin] = useState(ORIGIN)
   const [isDragging, setIsDragging] = useState(false)
 
@@ -43,5 +43,3 @@ const useDrag = ({ onDragStart = noop, onDrag = noop, onDragEnd = noop }) => {
 
   return handleMouseDown
 }
-
-export default useDrag

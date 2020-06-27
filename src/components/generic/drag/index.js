@@ -1,3 +1,3 @@
-import useDrag from './behavior/use-drag'
+import { useDrag } from './behavior/use-drag'
 
 export { useDrag }

@@ -1,5 +1,3 @@
 import React from 'react'
 
-const ListContext = React.createContext()
-
-export default ListContext
+export const ListContext = React.createContext()

@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 
-const useDragWindow = (position, onMove) => {
+export const useDragWindow = (position, onMove) => {
   const positionRef = useRef()
   const startPositionRef = useRef()
   positionRef.current = position
@@ -24,5 +24,3 @@ const useDragWindow = (position, onMove) => {
 
   return { isDragging, onDragStart, onDrag, onDragEnd }
 }
-
-export default useDragWindow
