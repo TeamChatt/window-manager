@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { createContext, useRef, useContext } from 'react'
 import { useCSSAnimation } from '/components/generic/animation'
 import { Window } from '/components/window'
 import { WMOutline } from './outline'
@@ -14,6 +14,10 @@ const transitionClassNames = {
   'enter-active': cx('appear--enter-active'),
   'enter-done':   cx('appear--enter-done'),
 }
+
+const WindowElementContext = createContext()
+
+export const useWMWindowElement = () => useContext(WindowElementContext)
 
 export const WMWindow = ({
   id,
@@ -43,29 +47,31 @@ export const WMWindow = ({
   }
 
   return (
-    <div
-      className={cx('window-frame')}
-      style={style}
-      ref={frameRef}
-      tabIndex="0"
-    >
-      <Window
-        className={transitionClassName}
-        title={title}
-        isFocused={isFocused}
-        onMinimize={onMinimize}
-        onClose={onClose}
-        onDragStart={onDragStart}
-        onDrag={onDrag}
-        onDragEnd={onDragEnd}
-      >
-        {children}
-      </Window>
-      <WMOutline id={id} />
+    <WindowElementContext.Provider value={frameRef}>
       <div
-        ref={shadowRef}
-        className={cx('window-frame_shadow', transitionClassName)}
-      />
-    </div>
+        className={cx('window-frame')}
+        style={style}
+        ref={frameRef}
+        tabIndex="0"
+      >
+        <Window
+          className={transitionClassName}
+          title={title}
+          isFocused={isFocused}
+          onMinimize={onMinimize}
+          onClose={onClose}
+          onDragStart={onDragStart}
+          onDrag={onDrag}
+          onDragEnd={onDragEnd}
+        >
+          {children}
+        </Window>
+        <WMOutline id={id} />
+        <div
+          ref={shadowRef}
+          className={cx('window-frame_shadow', transitionClassName)}
+        />
+      </div>
+    </WindowElementContext.Provider>
   )
 }

@@ -4,6 +4,8 @@ export {
   WMTaskbarButton,
   WMFileGridItem,
   useWindowState,
+  useWindowState as useWMWindowState,
+  useWMWindowElement,
 } from '/components/window-manager'
 
 export { FileGrid as WMFileGrid } from '/components/file-grid'

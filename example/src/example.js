@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
-  useWindowState,
+  useWMWindowState,
+  useWMWindowElement,
   WindowManager,
   WMFileGridItem,
   WMFileGrid,
@@ -66,6 +67,28 @@ const FolderWindow = ({ fsItems, onOpenItem }) => (
   </div>
 )
 
+const Counter = ({ count, setCount }) => {
+  const windowElement = useWMWindowElement()
+  
+  // Window-level hotkey
+  useEffect(() => {
+    const el = windowElement.current
+    const handler = (event) => {
+      if(event.key === ' ' && event.target === el) {
+        setCount((c) => c + 1)
+      }
+    }
+
+    el.addEventListener('keypress', handler)
+    return () => el.removeEventListener('keypress', handler)
+  }, [windowElement.current])
+
+  return (
+    <div>
+      <button onClick={() => setCount((c) => c + 1)}>{count}</button>
+    </div>
+  )
+}
 
 const fsItems = [
   { id: 'chat', label: 'Chat', type: 'application/chat' },
@@ -110,13 +133,8 @@ const fsItems = [
 ]
 const ExampleApp = () => {
   const [count, setCount] = useState(0)
-  const counter = (
-    <div>
-      <button onClick={() => setCount((c) => c + 1)}>{count}</button>
-    </div>
-  )
 
-  const [windowState, windowActions] = useWindowState({
+  const [windowState, windowActions] = useWMWindowState({
     chat: {
       data: { id: 'chat', label: 'Chat', type: 'application/chat' },
       visibility: 'open',
@@ -139,7 +157,7 @@ const ExampleApp = () => {
       case 'application/chat': {
         return {
           title: 'Chat',
-          content: counter,
+          content: <Counter count={count} setCount={setCount} />,
         }
       }
       case 'file/image': {
