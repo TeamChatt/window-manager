@@ -40,6 +40,10 @@ $icon-size: 48px;
   display: block;
   padding: $space-inset-xxs;
   font-size: $font-size-s;
+  max-width: $item-size;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   .file-grid-item:focus & {
     background: $color-blue-6;
