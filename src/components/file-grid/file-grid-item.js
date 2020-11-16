@@ -8,6 +8,11 @@ const cx = classnames.bind(styles)
 
 export const FileGridItem = ({ onDoubleClick, icon, label }) => {
   const color = useFileGridContext()
+  const onKeyDown = (e) => {
+    if(e.key === 'Enter') {
+      onDoubleClick(e)
+    }
+  }
   return (
     <button
       className={cx('file-grid-item', {
@@ -15,6 +20,7 @@ export const FileGridItem = ({ onDoubleClick, icon, label }) => {
         'file-grid-item--dark': color === 'dark',
       })}
       onDoubleClick={onDoubleClick}
+      onKeyDown={onKeyDown}
     >
       <div className={cx('file-grid-item_inner')}>
         <img className={cx('file-grid-item_icon')} src={icon} draggable="false" />
