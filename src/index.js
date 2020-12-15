@@ -10,6 +10,8 @@ export {
 
 export { FileGrid as WMFileGrid } from '/components/file-grid'
 
+export { AnimationContainer as WMAnimationContainer } from '/components/generic/animation'
+
 export {
   BSOD,
   BSODErrorBoundary,
