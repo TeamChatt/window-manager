@@ -14,6 +14,7 @@ export const useWindowFocus = (ref, { isFocused, onFocus, onBlur }) => {
     const handleFocus = () => {
       window.setTimeout(() => {
         const isActive =
+          ref.current &&
           ref.current.contains(document.activeElement) ||
           ref.current === document.activeElement
         const isFocused = isFocusedRef.current
