@@ -1,8 +1,10 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
   output: {
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   devtool: "source-map",
   externals: {
@@ -34,7 +36,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -58,6 +60,7 @@ module.exports = {
       },
     ]
   },
+  plugins: [new MiniCssExtractPlugin()],
   resolve: {
     alias: {
       '#style':  path.resolve(__dirname, 'src/style/'),
