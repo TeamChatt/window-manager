@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Outline } from '/components/outline'
+import { Outline } from '~/src/components/outline'
 import { useAnimateRect } from './behavior/use-animate-rect'
 
 export const WMOutline = ({ id }) => {

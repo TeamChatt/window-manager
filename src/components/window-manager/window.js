@@ -1,6 +1,6 @@
 import React, { createContext, useRef, useContext } from 'react'
-import { useCSSAnimation } from '/components/generic/animation'
-import { Window } from '/components/window'
+import { useCSSAnimation } from '~/src/components/generic/animation'
+import { Window } from '~/src/components/window'
 import { WMOutline } from './outline'
 import { useDragWindow } from './behavior/use-drag-window'
 import { useWindowFocus } from './behavior/use-window-focus'

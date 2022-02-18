@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { FileGridItem } from '/components/file-grid'
+import { FileGridItem } from '~/src/components/file-grid'
 import { WMOutline } from './outline'
 import { useWindowContext } from './manager'
 

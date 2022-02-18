@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TaskbarButton } from '/components/taskbar'
+import { TaskbarButton } from '~/src/components/taskbar'
 import { WMOutline } from './outline'
 
 export const WMTaskbarButton = ({ id, active, hasOutline, onClick, children }) => (

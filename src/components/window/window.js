@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from '/components/generic/drag'
+import { useDrag } from '~/src/components/generic/drag'
 
 import styles from './window.scss'
 import classnames from 'classnames/bind'

@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from 'react'
 
-import { Manager } from '/components/manager'
-import { AnimationContainer } from '/components/generic/animation'
-import { BSODErrorBoundary } from '/components/blue-screen-of-death'
+import { Manager } from '~/src/components/manager'
+import { AnimationContainer } from '~/src/components/generic/animation'
+import { BSODErrorBoundary } from '~/src/components/blue-screen-of-death'
 import { WMWindow } from './window'
 import { WMTaskbarButton } from './taskbar-button'
 

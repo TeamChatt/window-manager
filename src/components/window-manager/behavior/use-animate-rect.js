@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import frame from '/utils/frame'
+import frame from '~/src/utils/frame'
 
-import { useDeferredAnimation } from '/components/generic/animation'
+import { useDeferredAnimation } from '~/src/components/generic/animation'
 
 const originRect = {
   left: 0,

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import runAsyncProcess from '/utils/run-async'
+import runAsyncProcess from '~/src/utils/run-async'
 import { useAnimation } from './use-animation'
 import { AnimationContext } from '../context'
 

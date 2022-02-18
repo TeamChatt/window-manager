@@ -6,13 +6,13 @@ export {
   useWindowState,
   useWindowState as useWMWindowState,
   useWMWindowElement,
-} from '/components/window-manager'
+} from './components/window-manager'
 
-export { FileGrid as WMFileGrid } from '/components/file-grid'
+export { FileGrid as WMFileGrid } from './components/file-grid'
 
-export { AnimationContainer as WMAnimationContainer } from '/components/generic/animation'
+export { AnimationContainer as WMAnimationContainer } from './components/generic/animation'
 
 export {
   BSOD,
   BSODErrorBoundary,
-} from '/components/blue-screen-of-death'
+} from './components/blue-screen-of-death'

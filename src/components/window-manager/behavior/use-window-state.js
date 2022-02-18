@@ -1,6 +1,6 @@
 import { useMemo, useReducer } from 'react'
-import { pathLens, modifyAt } from '/utils/lenses'
-import reorder from '/utils/reorder'
+import { pathLens, modifyAt } from '~/src/utils/lenses'
+import reorder from '~/src/utils/reorder'
 
 const mapObject = (obj, f) => {
   const app = (key, i) => {

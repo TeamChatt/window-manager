@@ -11,49 +11,31 @@
     "dist/**/*"
   ],
   "scripts": {
-    "start": "webpack-dev-server --mode development --config webpack.example.config.js --open --port 4500",
-    "build": "webpack --mode production",
-    "prepare": "npm run build"
+    "start": "parcel ./example/index.html --port 4500",
+    "build": "parcel ./src/index.js"
   },
   "author": "Matt Kaemmerer <matthew.kaemmerer@gmail.com>",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
-    "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.0.6",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "css-loader": "^3.2.0",
-    "eslint": "^6.5.1",
-    "eslint-loader": "^3.0.2",
-    "eslint-plugin-react": "^7.16.0",
-    "file-loader": "^4.2.0",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.1.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "node-sass": "^4.12.0",
+    "@babel/core": "^7.12.0",
+    "@parcel/transformer-sass": "2.3.1",
+    "normalize-scss": "^7.0.0",
+    "parcel": "^2.3.1",
     "postcss-preset-env": "^6.7.0",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-svg-loader": "^3.0.3",
-    "sass-loader": "^8.0.0",
-    "url-loader": "^2.2.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2"
+    "react-dom": "^16.10.2"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "normalize-scss": "^7.0.0",
-    "open-color": "^1.7.0",
-    "postcss-loader": "^3.0.0",
-    "style-loader": "^1.0.1"
+    "open-color": "^1.7.0"
   },
   "peerDependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.10.2",
     "typeface-roboto": "^0.0.75"
+  },
+  "alias": {
+    "window-manager": "./src/index.js"
   },
   "browserslist": "last 2 Chrome versions, last 2 Safari versions, last 2 Firefox versions"
 }

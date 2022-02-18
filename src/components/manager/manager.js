@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from 'react'
 
-import { FileGrid } from '/components/file-grid'
-import { Desktop } from '/components/desktop'
-import { Taskbar } from '/components/taskbar'
+import { FileGrid } from '~/src/components/file-grid'
+import { Desktop } from '~/src/components/desktop'
+import { Taskbar } from '~/src/components/taskbar'
 
 import styles from './manager.scss'
 import classnames from 'classnames/bind'

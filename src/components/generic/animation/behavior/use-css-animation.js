@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import cx from 'classnames'
-import frame from '/utils/frame'
-import runAsyncProcess from '/utils/run-async'
+import frame from '~/src/utils/frame'
+import runAsyncProcess from '~/src/utils/run-async'
 import { useAnimation } from './use-animation'
 
 const stagedAnimation = (animation) => async function *(el) {
