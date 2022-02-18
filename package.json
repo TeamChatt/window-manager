@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "parcel ./example/index.html --port 4500",
-    "build": "parcel build ./src/index.js",
+    "build": "parcel build ./src/index.ts",
     "clean": "rm -rf ./dist",
     "prepare": "npm run clean && npm run build"
   },
@@ -20,6 +20,7 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/config-default": "^2.0.1",
+    "@parcel/packager-ts": "^2.2.1",
     "@parcel/transformer-sass": "^2.2.1",
     "normalize-scss": "^7.0.0",
     "parcel": "^2.3.1",
@@ -39,7 +40,7 @@
     "typeface-roboto": "^0.0.75"
   },
   "alias": {
-    "window-manager": "./src/index.js"
+    "window-manager": "./src/index.ts"
   },
   "browserslist": "last 2 Chrome versions, last 2 Safari versions, last 2 Firefox versions"
 }

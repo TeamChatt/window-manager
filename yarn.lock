@@ -381,6 +381,13 @@
     "@parcel/utils" "2.3.1"
     posthtml "^0.16.4"
 
+"@parcel/packager-ts@^2.2.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@parcel/packager-ts/-/packager-ts-2.3.1.tgz#898becb9e2d4a0c17b10fbcb98df4fbab22cb41a"
+  integrity sha512-BK+jHIv1+6XDrgNpakgiEN5vmr2t6xXGlv7tHBhJ22za8JeUyh/IIN2316ru+ATYNHaqvvR9cNoX0jSdqXXw8A==
+  dependencies:
+    "@parcel/plugin" "2.3.1"
+
 "@parcel/plugin@2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@parcel/plugin/-/plugin-2.3.1.tgz#d7abc685ede4d7ae25bb15ccfcfa2a59e8d7c51d"
