@@ -6,7 +6,10 @@
   },
   "version": "0.12.1",
   "description": "Throwback Windows-XP style react components",
+  "source": "src/index.ts",
   "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
   "files": [
     "dist/**/*"
   ],
@@ -20,8 +23,9 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/config-default": "^2.0.1",
-    "@parcel/packager-ts": "^2.2.1",
-    "@parcel/transformer-sass": "^2.2.1",
+    "@parcel/packager-ts": "^2.3.1",
+    "@parcel/transformer-sass": "^2.3.1",
+    "@parcel/transformer-typescript-types": "^2.3.1",
     "@types/react": "^16.12.0",
     "normalize-scss": "^7.0.0",
     "parcel": "^2.3.1",
@@ -29,7 +33,8 @@
     "postcss-modules": "^4.3.0",
     "postcss-preset-env": "^7.2.3",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "classnames": "^2.2.5",
