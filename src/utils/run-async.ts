@@ -1,4 +1,4 @@
-const runAsyncProcess = (process) => (...args) => {
+export const runAsyncProcess = (process) => (...args) => {
   const gen = process(...args)
   
   let canceled = false
@@ -14,5 +14,3 @@ const runAsyncProcess = (process) => (...args) => {
 
   return () => { canceled = true }
 }
-
-export default runAsyncProcess

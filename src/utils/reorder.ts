@@ -1,4 +1,4 @@
-const reorder = (from, to) => index => {
+const reorder = (from: number, to: number) => (index: number): number => {
   if (index === from) {
     return to
   }

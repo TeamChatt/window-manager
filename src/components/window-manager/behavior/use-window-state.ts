@@ -20,7 +20,7 @@ const topWindow = state => {
     .pop() || []
   return topId
 }
-const reorderWindows = (from, to) => state => {
+const reorderWindows = (from: number, to: number) => state => {
   const reorderWindow = modifyAt(pathLens('order'), reorder(from, to))
   return mapObject(state, (key, window) => reorderWindow(window))
 }

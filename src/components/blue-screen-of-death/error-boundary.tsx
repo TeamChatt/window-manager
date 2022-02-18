@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react'
 
 import { BSOD } from './bsod'
 
 export class BSODErrorBoundary extends Component {
+  state: { error: null }
+  props: { children: ReactNode }
+  
   constructor(props) {
     super(props)
     this.state = { error: null }
