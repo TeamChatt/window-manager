@@ -3,7 +3,17 @@ import { useState, useCallback, useEffect } from 'react'
 const ORIGIN = { left: 0, top: 0 }
 const noop = () => {}
 
-export const useDrag = ({ onDragStart = noop, onDrag = noop, onDragEnd = noop }) => {
+type DragHandlers = {
+  onDragStart: () => void
+  onDrag: (offset: { left: number; top: number }) => void
+  onDragEnd: () => void
+}
+
+export const useDrag = ({
+  onDragStart = noop,
+  onDrag = noop,
+  onDragEnd = noop,
+}: DragHandlers) => {
   const [dragOrigin, setDragOrigin] = useState(ORIGIN)
   const [isDragging, setIsDragging] = useState(false)
 
@@ -18,7 +28,7 @@ export const useDrag = ({ onDragStart = noop, onDrag = noop, onDragEnd = noop })
     ({ clientX, clientY }) => {
       const offset = {
         left: clientX - dragOrigin.left,
-        top:  clientY - dragOrigin.top,
+        top: clientY - dragOrigin.top,
       }
       onDrag(offset)
     },
