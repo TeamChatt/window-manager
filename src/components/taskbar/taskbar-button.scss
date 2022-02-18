@@ -1,8 +1,8 @@
 @import '~/src/style/index';
 @import '~/src/style/theme';
 
-$border-style-button:          2px outset $color-blue-4;
-$border-style-button--active:  2px outset $color-blue-6;
+$border-style-button: 2px outset $color-blue-4;
+$border-style-button--active: 2px outset $color-blue-6;
 $border-style-button--pressed: 2px inset $color-blue-4;
 $box-shadow-focus: 0 0 0 2px $color-orange-4;
 
@@ -49,11 +49,6 @@ $gradient-dark: linear-gradient(
   svg {
     margin: -6px;
   }
-}
-
-.taskbar-button--borderless {
-  border: 2px solid transparent;
-  background: none;
 }
 
 .taskbar-button:focus {

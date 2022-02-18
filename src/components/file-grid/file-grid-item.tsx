@@ -1,15 +1,23 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { MouseEventHandler, ReactNode } from 'react'
 import { useFileGridContext } from './file-grid'
 
 import styles from './file-grid-item.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-export const FileGridItem = ({ onDoubleClick, icon, label }) => {
+type FileGridItemProps = {
+  onDoubleClick: MouseEventHandler
+  icon: string
+  label: ReactNode
+}
+export const FileGridItem = ({
+  onDoubleClick,
+  icon,
+  label,
+}: FileGridItemProps) => {
   const color = useFileGridContext()
   const onKeyDown = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       onDoubleClick(e)
     }
   }
@@ -23,14 +31,13 @@ export const FileGridItem = ({ onDoubleClick, icon, label }) => {
       onKeyDown={onKeyDown}
     >
       <div className={cx('file-grid-item_inner')}>
-        <img className={cx('file-grid-item_icon')} src={icon} draggable="false" />
+        <img
+          className={cx('file-grid-item_icon')}
+          src={icon}
+          draggable="false"
+        />
         <span className={cx('file-grid-item_label')}>{label}</span>
       </div>
     </button>
   )
-}
-FileGridItem.propTypes = {
-  onDoubleClick: PropTypes.func,
-  icon: PropTypes.string,
-  label: PropTypes.node,
 }

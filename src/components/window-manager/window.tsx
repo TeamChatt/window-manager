@@ -1,4 +1,4 @@
-import React, { createContext, useRef, useContext } from 'react'
+import React, { createContext, useRef, useContext, RefObject } from 'react'
 import { useCSSAnimation } from '~/src/components/generic/animation'
 import { Window } from '~/src/components/window'
 import { WMOutline } from './outline'
@@ -10,14 +10,14 @@ import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
 const transitionClassNames = {
-  'enter':        cx('appear--enter'),
+  enter: cx('appear--enter'),
   'enter-active': cx('appear--enter-active'),
-  'enter-done':   cx('appear--enter-done'),
+  'enter-done': cx('appear--enter-done'),
 }
 
-const WindowElementContext = createContext()
+const WindowElementContext = createContext<RefObject<JSX.Element> | null>(null)
 
-export const useWMWindowElement = () => useContext(WindowElementContext)
+export const useWMWindowElement = () => useContext(WindowElementContext)!
 
 export const WMWindow = ({
   id,
@@ -33,10 +33,14 @@ export const WMWindow = ({
   onBlur,
   onMove,
 }) => {
-  const shadowRef = useRef()
-  const transitionClassName = useCSSAnimation(shadowRef, true, transitionClassNames)
+  const shadowRef = useRef(null)
+  const transitionClassName = useCSSAnimation(
+    shadowRef,
+    true,
+    transitionClassNames
+  )
 
-  const frameRef = useRef()
+  const frameRef = useRef(null)
   useWindowFocus(frameRef, { isFocused, onFocus, onBlur })
 
   const { onDragStart, onDrag, onDragEnd } = useDragWindow(position, onMove)
@@ -52,7 +56,7 @@ export const WMWindow = ({
         className={cx('window-frame')}
         style={style}
         ref={frameRef}
-        tabIndex="0"
+        tabIndex={0}
       >
         <Window
           className={transitionClassName}

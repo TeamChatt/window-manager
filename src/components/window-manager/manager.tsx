@@ -6,7 +6,7 @@ import { BSODErrorBoundary } from '~/src/components/blue-screen-of-death'
 import { WMWindow } from './window'
 import { WMTaskbarButton } from './taskbar-button'
 
-const WindowContext = createContext()
+const WindowContext = createContext([])
 
 export const useWindowContext = () => useContext(WindowContext)
 

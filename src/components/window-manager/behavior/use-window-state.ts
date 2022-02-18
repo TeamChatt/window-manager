@@ -1,30 +1,47 @@
 import { useMemo, useReducer } from 'react'
 import { pathLens, modifyAt } from '~/src/utils/lenses'
-import reorder from '~/src/utils/reorder'
+import { reorder } from '~/src/utils/reorder'
 
-const mapObject = (obj, f) => {
-  const app = (key, i) => {
+type WindowID = string
+
+type WindowInstance = {
+  visibility: 'open' | 'closed' | 'minimized'
+  order: number
+  position: { top: number; left: number }
+  isFocused: boolean
+}
+
+type WindowState = {
+  [K in WindowID]: WindowInstance
+}
+
+const mapObject = <T, S>(
+  obj: { [K in string]: T },
+  f: (key: string, t: T, i: number) => S
+): { [K in string]: S } => {
+  const app = (key: string, i: number) => {
     const lens = pathLens(key)
-    return modifyAt(lens, value => f(key, value, i))
+    return modifyAt(lens, (value) => f(key, value, i))
   }
   return Object.keys(obj)
     .map(app)
     .reduce((acc, f) => f(acc), obj)
 }
 
-const topWindow = state => {
+const topWindow = (state: WindowState) => {
   const windows = Object.entries(state)
-  const [topId] = windows
-    .filter(([, window]) => window.visibility === 'open')
-    .sort(([, window1], [, window2]) => window1.order - window2.order)
-    .pop() || []
+  const [topId] =
+    windows
+      .filter(([, window]) => window.visibility === 'open')
+      .sort(([, window1], [, window2]) => window1.order - window2.order)
+      .pop() || []
   return topId
 }
-const reorderWindows = (from: number, to: number) => state => {
+const reorderWindows = (from: number, to: number) => (state: WindowState) => {
   const reorderWindow = modifyAt(pathLens('order'), reorder(from, to))
   return mapObject(state, (key, window) => reorderWindow(window))
 }
-const autoPosition = (state) => {
+const autoPosition = (state: WindowState) => {
   const topId = topWindow(state) || -1
   const topPosition = pathLens(topId, 'position').get(state)
   return topPosition
@@ -38,22 +55,24 @@ const autoPosition = (state) => {
       }
 }
 
-
-const initializeWindow = (key, window, i) => ({
+const initializeWindow = (
+  key: string,
+  window: Partial<WindowInstance>,
+  i: number
+): WindowInstance => ({
   position: {
     top: 50 + i * 50,
     left: 200 + i * 100,
   },
   visibility: 'closed',
+  isFocused: false,
   ...window,
-  order: i+1,
+  order: i + 1,
 })
-const initialize = state => {
-  return mapObject(state, initializeWindow)
-}
+const initialize = (state: WindowState): WindowState =>
+  mapObject(state, initializeWindow)
 
-
-const reducer = (state, action) => {
+const reducer = (state: WindowState, action) => {
   if (action.type.startsWith('window.')) {
     return windowReducer(state, action)
   }
@@ -62,7 +81,7 @@ const reducer = (state, action) => {
   }
   return state
 }
-const topReducer = (state, { type, id, window, newState }) => {
+const topReducer = (state: WindowState, { type, id, window, newState }) => {
   const windowLens = pathLens(id)
   switch (type) {
     case 'top.create': {
@@ -78,52 +97,46 @@ const topReducer = (state, { type, id, window, newState }) => {
     }
     case 'top.focusNext': {
       const topId = topWindow(state)
-      return topId
-        ? pathLens(topId, 'isFocused').set(state, true)
-        : state
+      return topId ? pathLens(topId, 'isFocused').set(state, true) : state
     }
     case 'top.reset': {
       return initialize(newState)
     }
   }
 }
-const windowReducer = (state, { type, id, position }) => {
-  const visibilityLens = pathLens(id, 'visibility')
-  const positionLens   = pathLens(id, 'position')
-  const focusLens      = pathLens(id, 'isFocused')
-  switch (type) {
+const windowReducer = (state: WindowState, action) => {
+  const visibilityLens = pathLens(action.id, 'visibility')
+  const positionLens = pathLens(action.id, 'position')
+  const focusLens = pathLens(action.id, 'isFocused')
+  switch (action.type) {
     case 'window.open':
       return visibilityLens.set(state, 'open')
     case 'window.minimize':
       return visibilityLens.set(state, 'minimized')
     case 'window.close':
       return visibilityLens.set(state, 'closed')
-    case 'window.focus': 
+    case 'window.focus':
       return focusLens.set(state, true)
     case 'window.blur':
       return focusLens.set(state, false)
     case 'window.move':
-      return modifyAt(positionLens, oldPosition => ({
+      return modifyAt(positionLens, (oldPosition) => ({
         ...oldPosition,
-        ...position,
+        ...action.position,
       }))(state)
     case 'window.bringToFront': {
-      const from = state[id].order
-      const to   = Object.keys(state).length
+      const from = state[action.id].order
+      const to = Object.keys(state).length
       return reorderWindows(from, to)(state)
     }
   }
 }
 
-export const useWindowState = initialState => {
-  const [state, dispatch] = useReducer(
-    reducer,
-    initialState,
-    initialize,
-  )
+export const useWindowState = (initialState: WindowState) => {
+  const [state, dispatch] = useReducer(reducer, initialState, initialize)
 
   // Window actions
-  const windowActions = id => ({
+  const windowActions = (id: WindowID) => ({
     open: () => {
       dispatch({ type: 'window.open', id })
       dispatch({ type: 'window.bringToFront', id })
@@ -147,19 +160,19 @@ export const useWindowState = initialState => {
   })
 
   // Top-level actions
-  const createWindow = (id, window) => {
-    if(state[id] === undefined) {
+  const createWindow = (id: WindowID, window) => {
+    if (state[id] === undefined) {
       dispatch({ type: 'top.create', id, window })
     }
   }
-  const destroyWindow = (id) => {
-    if(state[id] !== undefined) {
+  const destroyWindow = (id: WindowID) => {
+    if (state[id] !== undefined) {
       dispatch({ type: 'top.destroy', id })
       dispatch({ type: 'top.focusNext' })
     }
   }
-  const openWindow = async (id, window) => {
-    if(state[id] === undefined) {
+  const openWindow = async (id: WindowID, window) => {
+    if (state[id] === undefined) {
       createWindow(id, window)
       setTimeout(() => {
         windowActions(id).open()
@@ -168,12 +181,12 @@ export const useWindowState = initialState => {
       windowActions(id).open()
     }
   }
-  const closeWindow = (id) => {
-    if(state[id] !== undefined) {
+  const closeWindow = (id: WindowID) => {
+    if (state[id] !== undefined) {
       windowActions(id).close()
     }
   }
-  const reset = state => {
+  const reset = (state: WindowState) => {
     dispatch({ type: 'top.reset', newState: state })
   }
 
@@ -184,7 +197,7 @@ export const useWindowState = initialState => {
     openWindow,
     closeWindow,
     reset,
-    window: useMemo(() => mapObject(state, windowActions), [numWindows])
+    window: useMemo(() => mapObject(state, windowActions), [numWindows]),
   }
 
   return [state, actions]

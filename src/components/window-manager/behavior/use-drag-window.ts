@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
 
 export const useDragWindow = (position, onMove) => {
-  const positionRef = useRef()
-  const startPositionRef = useRef()
+  const positionRef = useRef({ top: 0, left: 0 })
+  const startPositionRef = useRef({ top: 0, left: 0 })
   positionRef.current = position
 
   const [isDragging, setIsDragging] = useState(false)
@@ -11,13 +11,16 @@ export const useDragWindow = (position, onMove) => {
     startPositionRef.current = positionRef.current
     setIsDragging(true)
   }, [])
-  const onDrag = useCallback((offset) => {
-    const newPosition = {
-      top: startPositionRef.current.top + offset.top,
-      left: startPositionRef.current.left + offset.left,
-    }
-    onMove(newPosition)
-  }, [onMove])
+  const onDrag = useCallback(
+    (offset) => {
+      const newPosition = {
+        top: startPositionRef.current.top + offset.top,
+        left: startPositionRef.current.left + offset.left,
+      }
+      onMove(newPosition)
+    },
+    [onMove]
+  )
   const onDragEnd = useCallback(() => {
     setIsDragging(false)
   }, [])

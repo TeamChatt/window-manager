@@ -3,7 +3,13 @@ import { frame } from '~/src/utils/wait'
 
 import { useDeferredAnimation } from '~/src/components/generic/animation'
 
-const originRect = {
+type Rect = {
+  left: number
+  top: number
+  right: number
+  bottom: number
+}
+const originRect: Rect = {
   left: 0,
   top: 0,
   right: 0,
@@ -15,23 +21,29 @@ const flipRect = (from, to) => {
   const toRect = to.getBoundingClientRect()
   return flipPosition(fromRect, toRect)
 }
-const flipPosition = (from, to) => ({
+const flipPosition = (from: Rect, to: Rect): Rect => ({
   top: from.top - to.top,
   left: from.left - to.left,
   bottom: -(from.bottom - to.bottom),
   right: -(from.right - to.right),
 })
-const makeCSSAnimation = (receive) =>
+
+type CSSAnimation = {
+  setup: (from: any, to: any) => void
+  run: (from: any, to: any) => void
+  teardown: (from: any, to: any) => void
+}
+const makeCSSAnimation = (anim: CSSAnimation) =>
   async function* (from, to) {
-    receive.setup(from, to)
+    anim.setup(from, to)
     await frame()
     yield
-    receive.run(from, to)
+    anim.run(from, to)
     await new Promise((resolve) =>
       to.addEventListener('transitionend', resolve)
     )
     yield
-    receive.teardown(from, to)
+    anim.teardown(from, to)
   }
 const noAnimation = async function* () {}
 

@@ -1,15 +1,21 @@
-import React, { createContext, useContext } from 'react'
-import PropTypes from 'prop-types'
+import React, { createContext, ReactNode, useContext } from 'react'
 
 import styles from './file-grid.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
-const FileGridContext = createContext()
+type LabelColor = 'light' | 'dark'
+
+const FileGridContext = createContext<LabelColor>('dark')
 export const useFileGridContext = () => useContext(FileGridContext)
 
-export const FileGrid = ({ children, layout, color }) => (
-  <FileGridContext.Provider value={color}>
+type FileGridProps = {
+  children: ReactNode
+  layout?: 'row' | 'column'
+  color?: LabelColor
+}
+export const FileGrid = ({ children, layout, color }: FileGridProps) => (
+  <FileGridContext.Provider value={color!}>
     <div
       className={cx('file-grid', {
         'file-grid--row': layout === 'row',
@@ -20,11 +26,6 @@ export const FileGrid = ({ children, layout, color }) => (
     </div>
   </FileGridContext.Provider>
 )
-FileGrid.propTypes = {
-  children: PropTypes.node,
-  layout: PropTypes.oneOf(['row', 'column']),
-  color: PropTypes.oneOf(['light', 'dark']),
-}
 FileGrid.defaultProps = {
   layout: 'row',
   color: 'dark',
