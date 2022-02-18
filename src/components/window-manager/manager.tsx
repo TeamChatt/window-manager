@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, ReactNode, useContext } from 'react'
 
 import { Manager } from '~/src/components/manager'
 import { AnimationContainer } from '~/src/components/generic/animation'
@@ -6,16 +6,27 @@ import { BSODErrorBoundary } from '~/src/components/blue-screen-of-death'
 import { WMWindow } from './window'
 import { WMTaskbarButton } from './taskbar-button'
 
-const WindowContext = createContext([])
+// TODO
+type WindowProps = any
+
+const WindowContext = createContext<WindowProps[]>([])
 
 export const useWindowContext = () => useContext(WindowContext)
 
+type WindowManagerProps = {
+  background: string
+  backgroundPosition?: string
+  windows: WindowProps[]
+  desktopItems: ReactNode
+  taskbarExtras?: ReactNode
+}
 export const WindowManager = ({
   background,
+  backgroundPosition,
   windows,
   desktopItems,
   taskbarExtras,
-}) => {
+}: WindowManagerProps) => {
   const windowItems = windows.map(
     ({ id, title, content, state, actions }) =>
       state.visibility === 'open' && (
@@ -62,6 +73,7 @@ export const WindowManager = ({
         <WindowContext.Provider value={windows}>
           <Manager
             background={background}
+            backgroundPosition={backgroundPosition}
             desktopItems={desktopItems}
             windowItems={windowItems}
             taskbarItems={taskbarItems}

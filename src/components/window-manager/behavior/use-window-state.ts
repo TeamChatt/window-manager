@@ -7,12 +7,17 @@ type WindowID = string
 type WindowInstance = {
   visibility: 'open' | 'closed' | 'minimized'
   order: number
+  data?: any
   position: { top: number; left: number }
+  dimensions?: { width: string | number; height: string | number }
   isFocused: boolean
 }
 
 type WindowState = {
   [K in WindowID]: WindowInstance
+}
+type WindowStatePartial = {
+  [K in WindowID]: Partial<WindowInstance>
 }
 
 const mapObject = <T, S>(
@@ -132,7 +137,7 @@ const windowReducer = (state: WindowState, action) => {
   }
 }
 
-export const useWindowState = (initialState: WindowState) => {
+export const useWindowState = (initialState: WindowStatePartial) => {
   const [state, dispatch] = useReducer(reducer, initialState, initialize)
 
   // Window actions

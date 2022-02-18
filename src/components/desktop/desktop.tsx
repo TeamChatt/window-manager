@@ -6,14 +6,25 @@ const cx = classnames.bind(styles)
 
 type DesktopProps = {
   background: string
+  backgroundPosition?: string
   children: ReactNode
 }
-export const Desktop = ({ background, children }: DesktopProps) => (
+export const Desktop = ({
+  background,
+  backgroundPosition,
+  children,
+}: DesktopProps) => (
   <div className={cx('desktop')}>
     <div
       className={cx('desktop_background')}
-      style={{ backgroundImage: `url(${background})` }}
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundPosition: backgroundPosition,
+      }}
     />
     {children}
   </div>
 )
+Desktop.defaultProps = {
+  backgroundPosition: 'top center',
+}

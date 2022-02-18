@@ -15,7 +15,7 @@ const transitionClassNames = {
   'enter-done': cx('appear--enter-done'),
 }
 
-const WindowElementContext = createContext<RefObject<JSX.Element> | null>(null)
+const WindowElementContext = createContext<RefObject<HTMLElement> | null>(null)
 
 export const useWMWindowElement = () => useContext(WindowElementContext)!
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { FileGrid } from '~/src/components/file-grid'
 import { Desktop } from '~/src/components/desktop'
@@ -8,18 +8,30 @@ import styles from './manager.scss'
 import classnames from 'classnames/bind'
 const cx = classnames.bind(styles)
 
+type ManagerProps = {
+  background: string
+  backgroundPosition?: string
+  windowItems: ReactNode
+  desktopItems: ReactNode
+  taskbarItems: ReactNode
+  taskbarExtras: ReactNode
+}
 export const Manager = ({
   background,
+  backgroundPosition,
   windowItems,
   desktopItems,
   taskbarItems,
   taskbarExtras,
-}) => {
+}: ManagerProps) => {
   return (
     <div className={cx('window-manager')}>
       <div className={cx('window-manager_layer-group')}>
         <div className={cx('window-manager_layer')}>
-          <Desktop background={background}>
+          <Desktop
+            background={background}
+            backgroundPosition={backgroundPosition}
+          >
             <FileGrid layout="column" color="light">
               {desktopItems}
             </FileGrid>

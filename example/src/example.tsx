@@ -7,7 +7,7 @@ import {
   WMFileGrid,
 } from 'window-manager'
 
-import background from '../images/touhou-wings.jpg'
+import background from '../images/desktop-xp.jpg'
 import folderIcon from '../images/folder.png'
 import imageIcon from '../images/image.png'
 import chatIcon from '../images/chat.png'
@@ -17,12 +17,11 @@ import picture1 from '../images/avatar-01.png'
 import picture2 from '../images/avatar-02.png'
 import picture3 from '../images/avatar-03.png'
 
-
 const iconTypes = {
   'application/chat': chatIcon,
   'file/image': imageIcon,
   'file/document': textIcon,
-  'folder': folderIcon,
+  folder: folderIcon,
 }
 const FSItem = ({ fsItem, onOpenItem }) => {
   const { id, label, type } = fsItem
@@ -44,7 +43,7 @@ const PictureWindow = ({ picture }) => (
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: 200,
-      background: 'black'
+      background: 'black',
     }}
   >
     <img src={picture} alt="" />
@@ -52,13 +51,11 @@ const PictureWindow = ({ picture }) => (
 )
 
 const TextWindow = ({ text }) => (
-  <div style={{ whiteSpace: 'pre-wrap', minHeight: 300 }}>
-    {text}
-  </div>
+  <div style={{ whiteSpace: 'pre-wrap', minHeight: 300 }}>{text}</div>
 )
 
 const FolderWindow = ({ fsItems, onOpenItem }) => (
-  <div style={{width: 400, height: 250 }}>
+  <div style={{ width: 400, height: 250 }}>
     <WMFileGrid>
       {fsItems.map((fsItem) => (
         <FSItem key={fsItem.id} fsItem={fsItem} onOpenItem={onOpenItem} />
@@ -69,12 +66,12 @@ const FolderWindow = ({ fsItems, onOpenItem }) => (
 
 const Counter = ({ count, setCount }) => {
   const windowElement = useWMWindowElement()
-  
+
   // Window-level hotkey
   useEffect(() => {
-    const el = windowElement.current
+    const el = windowElement.current!
     const handler = (event) => {
-      if(event.key === ' ' && event.target === el) {
+      if (event.key === ' ' && event.target === el) {
         setCount((c) => c + 1)
       }
     }
@@ -183,7 +180,7 @@ const ExampleApp = () => {
     }
   }
 
-  const windows = Object.keys(windowState).map(id => {
+  const windows = Object.keys(windowState).map((id) => {
     const state = windowState[id]
     const actions = windowActions.window[id]
     const fsItem = state.data
@@ -207,6 +204,7 @@ const ExampleApp = () => {
   return (
     <WindowManager
       background={background}
+      backgroundPosition={'bottom left'}
       desktopItems={desktopItems}
       windows={windows}
     />
