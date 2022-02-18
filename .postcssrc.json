@@ -1,0 +1,9 @@
+{
+  "modules": true,
+  "plugins": {
+    "postcss-preset-env": {},
+    "postcss-modules": {
+      "generateScopedName": "[name]__[local]--[hash:base64:5]"
+    }
+  }
+}
