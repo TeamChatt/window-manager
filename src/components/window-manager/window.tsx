@@ -1,4 +1,10 @@
-import React, { createContext, useRef, useContext, RefObject } from 'react'
+import React, {
+  createContext,
+  useRef,
+  useContext,
+  RefObject,
+  ReactNode,
+} from 'react'
 import { useCSSAnimation } from '~/src/components/generic/animation'
 import { Window } from '~/src/components/window'
 import { WMOutline } from './outline'
@@ -19,6 +25,21 @@ const WindowElementContext = createContext<RefObject<HTMLElement> | null>(null)
 
 export const useWMWindowElement = () => useContext(WindowElementContext)!
 
+type WMWindowProps = {
+  id: string
+  title: string
+  children: ReactNode
+  order: number
+  visibility: 'open' | 'closed' | 'minimized'
+  position: { top: number; left: number }
+  dimensions?: any
+  isFocused: boolean
+  onMinimize: () => void
+  onClose: () => void
+  onFocus: () => void
+  onBlur: () => void
+  onMove: (position: { top: number; left: number }) => void
+}
 export const WMWindow = ({
   id,
   title,
@@ -33,7 +54,7 @@ export const WMWindow = ({
   onFocus,
   onBlur,
   onMove,
-}) => {
+}: WMWindowProps) => {
   const shadowRef = useRef(null)
   const transitionClassName = useCSSAnimation(
     shadowRef,
