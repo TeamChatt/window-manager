@@ -5,9 +5,15 @@ import { AnimationContainer } from '~/src/components/generic/animation'
 import { BSODErrorBoundary } from '~/src/components/blue-screen-of-death'
 import { WMWindow } from './window'
 import { WMTaskbarButton } from './taskbar-button'
+import { WindowActions, WindowState } from './behavior/use-window-state'
 
-// TODO
-type WindowProps = any
+type WindowProps = {
+  id: string
+  content: ReactNode
+  title: string
+  actions: WindowActions
+  state: WindowState
+}
 
 const WindowContext = createContext<WindowProps[]>([])
 
@@ -27,28 +33,25 @@ export const WindowManager = ({
   desktopItems,
   taskbarExtras,
 }: WindowManagerProps) => {
-  const windowItems = windows.map(
-    ({ id, title, content, state, actions }) =>
-       (
-        <WMWindow
-          key={id}
-          id={id}
-          title={title}
-          visibility={state.visibility}
-          order={state.order}
-          position={state.position}
-          dimensions={state.dimensions}
-          isFocused={state.isFocused}
-          onMinimize={actions.minimize}
-          onClose={actions.close}
-          onFocus={actions.focus}
-          onBlur={actions.blur}
-          onMove={actions.move}
-        >
-          {content}
-        </WMWindow>
-      )
-  )
+  const windowItems = windows.map(({ id, title, content, state, actions }) => (
+    <WMWindow
+      key={id}
+      id={id}
+      title={title}
+      visibility={state.visibility}
+      order={state.order}
+      position={state.position}
+      dimensions={state.dimensions}
+      isFocused={state.isFocused}
+      onMinimize={actions.minimize}
+      onClose={actions.close}
+      onFocus={actions.focus}
+      onBlur={actions.blur}
+      onMove={actions.move}
+    >
+      {content}
+    </WMWindow>
+  ))
   const taskbarItems = windows.map(
     ({ id, title, state, actions }) =>
       state.visibility !== 'closed' && (

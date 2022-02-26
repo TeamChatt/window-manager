@@ -7,7 +7,7 @@ import {
   WMFileGrid,
 } from 'window-manager'
 
-import background from '../images/desktop-xp.jpg'
+import background from '../images/desktop-xp.jpg' 
 import folderIcon from '../images/folder.png'
 import imageIcon from '../images/image.png'
 import chatIcon from '../images/chat.png'
@@ -129,7 +129,7 @@ const fsItems = [
     ],
   },
 ]
-const ExampleApp = () => {
+export const ExampleApp = () => {
   const [windowState, windowActions] = useWMWindowState({
     chat: {
       data: { id: 'chat', label: 'Chat', type: 'application/chat' },
@@ -177,6 +177,7 @@ const ExampleApp = () => {
         }
       }
     }
+    return {title: '', content: ''}
   }
 
   const windows = Object.keys(windowState).map((id) => {
@@ -210,4 +211,3 @@ const ExampleApp = () => {
   )
 }
 
-export default ExampleApp
