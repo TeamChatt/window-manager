@@ -29,11 +29,12 @@ export const WindowManager = ({
 }: WindowManagerProps) => {
   const windowItems = windows.map(
     ({ id, title, content, state, actions }) =>
-      state.visibility === 'open' && (
+       (
         <WMWindow
           key={id}
           id={id}
           title={title}
+          visibility={state.visibility}
           order={state.order}
           position={state.position}
           dimensions={state.dimensions}

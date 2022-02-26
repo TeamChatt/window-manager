@@ -64,7 +64,8 @@ const FolderWindow = ({ fsItems, onOpenItem }) => (
   </div>
 )
 
-const Counter = ({ count, setCount }) => {
+const Counter = () => {
+  const [count, setCount] = useState(0)
   const windowElement = useWMWindowElement()
 
   // Window-level hotkey
@@ -129,8 +130,6 @@ const fsItems = [
   },
 ]
 const ExampleApp = () => {
-  const [count, setCount] = useState(0)
-
   const [windowState, windowActions] = useWMWindowState({
     chat: {
       data: { id: 'chat', label: 'Chat', type: 'application/chat' },
@@ -154,7 +153,7 @@ const ExampleApp = () => {
       case 'application/chat': {
         return {
           title: 'Chat',
-          content: <Counter count={count} setCount={setCount} />,
+          content: <Counter />,
         }
       }
       case 'file/image': {

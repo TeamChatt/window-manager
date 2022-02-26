@@ -24,6 +24,7 @@ export const WMWindow = ({
   title,
   children,
   order,
+  visibility,
   position,
   dimensions,
   isFocused,
@@ -36,7 +37,7 @@ export const WMWindow = ({
   const shadowRef = useRef(null)
   const transitionClassName = useCSSAnimation(
     shadowRef,
-    true,
+    visibility === 'open',
     transitionClassNames
   )
 
@@ -46,6 +47,7 @@ export const WMWindow = ({
   const { onDragStart, onDrag, onDragEnd } = useDragWindow(position, onMove)
   const style = {
     zIndex: order,
+    visibility: visibility === 'open' ? 'visible' : 'hidden',
     ...position,
     ...dimensions,
   }
@@ -54,6 +56,7 @@ export const WMWindow = ({
     <WindowElementContext.Provider value={frameRef}>
       <div
         className={cx('window-frame')}
+        aria-hidden={visibility !== 'open'}
         style={style}
         ref={frameRef}
         tabIndex={0}
@@ -68,9 +71,9 @@ export const WMWindow = ({
           onDrag={onDrag}
           onDragEnd={onDragEnd}
         >
-          {children}
+          {visibility === 'closed' ? <></> : children}
         </Window>
-        <WMOutline id={id} />
+        {visibility === 'open' ? <WMOutline id={id} /> : <></>}
         <div
           ref={shadowRef}
           className={cx('window-frame_shadow', transitionClassName)}
