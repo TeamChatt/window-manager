@@ -1,4 +1,4 @@
-import { useMemo, useReducer } from 'react'
+import { useMemo, useReducer, useRef } from 'react'
 import { pathLens, modifyAt } from '~/src/utils/lenses'
 import { reorder } from '~/src/utils/reorder'
 
@@ -161,6 +161,8 @@ export const useWindowState = (
   initialState: WindowsStatePartial
 ): [WindowsState, WindowsActions] => {
   const [state, dispatch] = useReducer(reducer, initialState, initialize)
+  const stateRef = useRef(state)
+  stateRef.current = state
 
   // Window actions
   const windowActions = (id: WindowID): WindowActions => ({
@@ -188,17 +190,20 @@ export const useWindowState = (
 
   // Top-level actions
   const createWindow = (id: WindowID, window) => {
+    const state = stateRef.current
     if (state[id] === undefined) {
       dispatch({ type: 'top.create', id, window })
     }
   }
   const destroyWindow = (id: WindowID) => {
+    const state = stateRef.current
     if (state[id] !== undefined) {
       dispatch({ type: 'top.destroy', id })
       dispatch({ type: 'top.focusNext' })
     }
   }
   const openWindow = async (id: WindowID, window) => {
+    const state = stateRef.current
     if (state[id] === undefined) {
       createWindow(id, window)
       setTimeout(() => {
@@ -209,6 +214,7 @@ export const useWindowState = (
     }
   }
   const closeWindow = (id: WindowID) => {
+    const state = stateRef.current
     if (state[id] !== undefined) {
       windowActions(id).close()
     }
