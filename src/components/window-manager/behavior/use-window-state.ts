@@ -96,7 +96,7 @@ const initializeWindow = (
 const initialize = (state: WindowsState): WindowsState =>
   mapObject(state, initializeWindow)
 
-const reducer = (state: WindowsState, action) => {
+const reducer = (state: WindowsState, action): WindowsState => {
   if (action.type.startsWith('window.')) {
     return windowReducer(state, action)
   }
@@ -149,8 +149,9 @@ const windowReducer = (state: WindowsState, action) => {
         ...action.position,
       }))(state)
     case 'window.bringToFront': {
+      const top = topWindow(state)
       const from = state[action.id].order
-      const to = Object.keys(state).length
+      const to = top ? state[top].order : from
       return reorderWindows(from, to)(state)
     }
   }
