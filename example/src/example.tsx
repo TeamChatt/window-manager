@@ -7,7 +7,7 @@ import {
   WMFileGrid,
 } from 'window-manager'
 
-import background from '../images/desktop-xp.jpg' 
+import background from '../images/desktop-xp.jpg'
 import folderIcon from '../images/folder.png'
 import imageIcon from '../images/image.png'
 import chatIcon from '../images/chat.png'
@@ -16,6 +16,7 @@ import textIcon from '../images/text-file.png'
 import picture1 from '../images/avatar-01.png'
 import picture2 from '../images/avatar-02.png'
 import picture3 from '../images/avatar-03.png'
+import bunny from '../images/bunny-sunglasses.jpg'
 
 const iconTypes = {
   'application/chat': chatIcon,
@@ -43,10 +44,11 @@ const PictureWindow = ({ picture }) => (
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: 200,
+      maxWidth: 800,
       background: 'black',
     }}
   >
-    <img src={picture} alt="" />
+    <img style={{maxWidth: '100%'}} src={picture} alt="" />
   </div>
 )
 
@@ -127,6 +129,12 @@ const fsItems = [
         file: 'Hello, World!',
       },
     ],
+  },
+  {
+    id: 'bunny',
+    label: 'bunny.jpg',
+    type: 'file/image',
+    file: bunny,
   },
 ]
 export const ExampleApp = () => {
@@ -210,4 +218,3 @@ export const ExampleApp = () => {
     />
   )
 }
-
