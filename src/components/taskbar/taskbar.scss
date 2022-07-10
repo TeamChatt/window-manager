@@ -1,15 +1,6 @@
 @import '~/src/style/index';
 @import '~/src/style/theme';
 
-$taskbar-gradient: linear-gradient(
-  to bottom,
-  $color-blue-3 0%,
-  $color-blue-6 10%,
-  $color-blue-5 30%,
-  $color-blue-5 80%,
-  $color-blue-7 100%
-);
-
 .taskbar {
   display: grid;
   grid-auto-flow: column;
@@ -20,6 +11,6 @@ $taskbar-gradient: linear-gradient(
   height: 48px;
 
   border: $os-border-style-window;
-  background: $taskbar-gradient;
+  background: $os-gradient--theme;
   z-index: 100;
 }

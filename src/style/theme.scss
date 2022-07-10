@@ -3,8 +3,15 @@ $os-color-warm-gray-0: #f5eee5;
 $os-color-dark-blue-0: #1e00ff;
 
 $os-color--border-standard:      $color-indigo-2;
-$os-color--border-window:        $color-blue-5;
-$os-color--border-window--fade:  $color-blue-3;
+
+$os-color--border-blue:        $color-blue-5;
+$os-color--border-blue--fade:  $color-blue-3;
+
+$os-color--border-silver:        $color-gray-5;
+$os-color--border-silver--fade:  $color-gray-3;
+
+$os-color--border-window:        $os-color--border-silver;
+$os-color--border-window--fade:  $os-color--border-silver--fade;
 
 // Borders
 $os-border-style-standard:       1px solid  $os-color--border-standard;
@@ -12,6 +19,25 @@ $os-border-style-window:         2px outset $os-color--border-window;
 $os-border-style-window--fade:   2px outset $os-color--border-window--fade;
 
 $os-border-radius-l:  12px;
+
+// Gradients
+$os-gradient--blue: linear-gradient(
+  to bottom,
+  $color-blue-3 0%,
+  $color-blue-6 10%,
+  $color-blue-5 30%,
+  $color-blue-5 80%,
+  $color-blue-7 100%
+);
+
+$os-gradient--silver: linear-gradient(
+  to bottom,
+  $color-gray-3 0%,
+  $color-gray-6 20%,
+  $color-gray-3 100%
+);
+
+$os-gradient--theme: $os-gradient--silver;
 
 // Shadows
 $os-shadow-l: 0 8px 24px $color--shadow;
