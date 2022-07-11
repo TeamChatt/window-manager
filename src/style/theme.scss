@@ -4,19 +4,21 @@ $os-color-dark-blue-0: #1e00ff;
 
 $os-color--border-standard:      $color-indigo-2;
 
-$os-color--border-blue:        $color-blue-5;
-$os-color--border-blue--fade:  $color-blue-3;
+$os-color--border-blue:          $color-blue-5;
+$os-color--border-blue--fade:    $color-blue-3;
 
 $os-color--border-silver:        $color-gray-5;
 $os-color--border-silver--fade:  $color-gray-3;
 
-$os-color--border-window:        $os-color--border-silver;
-$os-color--border-window--fade:  $os-color--border-silver--fade;
+$os-color--border-window:        var(--os-color--border-window, $os-color--border-blue);
+$os-color--border-window--fade:  var(--os-color--border-window--fade, $os-color--border-blue--fade);
 
 // Borders
 $os-border-style-standard:       1px solid  $os-color--border-standard;
 $os-border-style-window:         2px outset $os-color--border-window;
 $os-border-style-window--fade:   2px outset $os-color--border-window--fade;
+
+$os-box-shadow-focus: 0 0 0 2px $color-orange-4;
 
 $os-border-radius-l:  12px;
 
@@ -87,10 +89,10 @@ $os-gradient--silver-reverse: linear-gradient(
 );
 
 
-$os-gradient--theme:          $os-gradient--silver;
-$os-gradient--theme-light:    $os-gradient--silver-light;
-$os-gradient--theme-dark:     $os-gradient--silver-dark;
-$os-gradient--theme-reverse:  $os-gradient--silver-reverse;
+$os-gradient--theme:          var(--os-gradient--theme, $os-gradient--blue);
+$os-gradient--theme-light:    var(--os-gradient--theme-light, $os-gradient--silver-light);
+$os-gradient--theme-dark:     var(--os-gradient--theme-dark, $os-gradient--silver-dark);
+$os-gradient--theme-reverse:  var(--os-gradient--theme-reverse, $os-gradient--silver-reverse);
 
 // Shadows
 $os-shadow-l: 0 8px 24px $color--shadow;

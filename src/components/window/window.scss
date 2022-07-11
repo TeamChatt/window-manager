@@ -1,6 +1,21 @@
 @import '~/src/style/index';
 @import '~/src/style/theme';
 
+$button-color: var(--wm-window-button-color, $color-blue);
+
+:global
+[data-theme-color="silver"] {
+  --wm-window-button-color: #{$color-gray-5};
+}
+
+:global
+[data-theme-color="blue"] {
+  --wm-window-button-color: #{$color-blue};
+}
+
+
+
+
 .window {
   display: flex;
   flex: 1;
@@ -68,10 +83,6 @@ $highlight-gradient: linear-gradient(
   transparentize($color-black, 0.9) 100%
 );
 
-$box-shadow-focus: 0 0 0 2px $color-orange-4;
-// $button-color: $color-blue;
-$button-color: $color-gray-5;
-
 .window-button {
   display: flex;
   align-items: center;
@@ -92,7 +103,7 @@ $button-color: $color-gray-5;
 
   &:focus {
     outline: none;
-    box-shadow: $box-shadow-focus;
+    box-shadow: $os-box-shadow-focus;
   }
 }
 .window-button--close {

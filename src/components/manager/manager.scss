@@ -1,10 +1,31 @@
 @import '~/src/style/index';
+@import '~/src/style/theme';
+
 
 .window-manager {
   display: grid;
   grid-template-rows: 1fr min-content;
   height: 100vh;
   overflow: hidden;
+
+  &[data-theme-color="silver"] {
+    --os-gradient--theme: #{$os-gradient--silver};
+    --os-gradient--theme-light: #{$os-gradient--silver-light};
+    --os-gradient--theme-dark: #{$os-gradient--silver-dark};
+    --os-gradient--theme-reverse: #{$os-gradient--silver-reverse};
+
+    --os-color--border-window: #{$os-color--border-silver};
+    --os-color--border-window--fade: #{$os-color--border-silver--fade};
+  }
+  &[data-theme-color="blue"] {
+    --os-gradient--theme: #{$os-gradient--blue};
+    --os-gradient--theme-light: #{$os-gradient--blue-light};
+    --os-gradient--theme-dark: #{$os-gradient--blue-dark};
+    --os-gradient--theme-reverse: #{$os-gradient--blue-reverse};
+
+    --os-color--border-window: #{$os-color--border-blue};
+    --os-color--border-window--fade: #{$os-color--border-blue--fade};
+  }
 }
 
 .window-manager_layer-group {
