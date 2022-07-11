@@ -1,15 +1,19 @@
 @import '~/src/style/index';
 @import '~/src/style/theme';
 
+
+$text-color:   var(--wm-window-color, $color--text-inverse);
 $button-color: var(--wm-window-button-color, $color-blue);
 
 :global
 [data-theme-color="silver"] {
+  --wm-window-color: #{$color--text-standard};
   --wm-window-button-color: #{$color-gray-5};
 }
 
 :global
 [data-theme-color="blue"] {
+  --wm-window-color: #{$color--text-inverse};
   --wm-window-button-color: #{$color-blue};
 }
 
@@ -48,7 +52,7 @@ $button-color: var(--wm-window-button-color, $color-blue);
 
 .window_title {
   flex: 1;
-  color: $color--text-inverse;
+  color: $text-color;
   padding: $space-inset-stretch-m;
   text-shadow: 0 1px transparentize($color-black, 0.5);
 }

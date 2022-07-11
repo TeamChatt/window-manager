@@ -1,17 +1,20 @@
 @import '~/src/style/index';
 @import '~/src/style/theme';
 
+$text-color:           var(--wm-taskbar-color, $color--text-inverse);
 $border-color:         var(--wm-taskbar-border-color, $color-blue-4);
 $border-color--active: var(--wm-taskbar-border-color--active, $color-blue-6);
 
 :global
 [data-theme-color="silver"] {
+  --wm-taskbar-color:                #{$color--text-standard};
   --wm-taskbar-border-color:         #{$color-gray-4};
   --wm-taskbar-border-color--active: #{$color-gray-6};
 }
 
 :global
 [data-theme-color="blue"] {
+  --wm-taskbar-color:                #{$color--text-inverse};
   --wm-taskbar-border-color:         #{$color-blue-4};
   --wm-taskbar-border-color--active: #{$color-blue-6};
 }
@@ -32,7 +35,7 @@ $border-style-button--pressed: 2px inset $border-color;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
-  color: $color--text-inverse;
+  color: $text-color;
   text-shadow: 0 1px transparentize($color-black, 0.5);
   white-space: nowrap;
 
@@ -53,6 +56,10 @@ $border-style-button--pressed: 2px inset $border-color;
 .taskbar-button--active {
   border: $border-style-button--active;
   background: $os-gradient--theme-dark;
+
+  [data-theme-color="silver"] & {
+    --wm-taskbar-color: #{$color--text-inverse};
+  }
 }
 
 .taskbar-button:active:not([disabled]) {
