@@ -29,6 +29,31 @@ $os-gradient--blue: linear-gradient(
   $color-blue-5 80%,
   $color-blue-7 100%
 );
+$os-gradient--blue-light: linear-gradient(
+  to bottom,
+  $color-blue-3 0%,
+  $color-blue-5 10%,
+  $color-blue-4 30%,
+  $color-blue-4 80%,
+  $color-blue-6 100%
+);
+$os-gradient--blue-dark: linear-gradient(
+  to bottom,
+  $color-blue-6 0%,
+  $color-blue-7 10%,
+  $color-blue-7 30%,
+  $color-blue-7 80%,
+  $color-blue-8 100%
+);
+$os-gradient--blue-reverse: linear-gradient(
+  to top,
+  $color-blue-3 0%,
+  $color-blue-5 10%,
+  $color-blue-4 30%,
+  $color-blue-4 80%,
+  $color-blue-6 100%
+);
+
 
 $os-gradient--silver: linear-gradient(
   to bottom,
@@ -36,8 +61,36 @@ $os-gradient--silver: linear-gradient(
   $color-gray-6 20%,
   $color-gray-3 100%
 );
+$os-gradient--silver-light: linear-gradient(
+  to bottom,
+  $color-gray-3 0%,
+  $color-gray-5 10%,
+  $color-gray-4 30%,
+  $color-gray-4 80%,
+  $color-gray-6 100%
+);
+$os-gradient--silver-dark: linear-gradient(
+  to bottom,
+  $color-gray-5 0%,
+  $color-gray-6 10%,
+  $color-gray-6 30%,
+  $color-gray-6 80%,
+  $color-gray-7 100%
+);
+$os-gradient--silver-reverse: linear-gradient(
+  to top,
+  $color-gray-3 0%,
+  $color-gray-5 10%,
+  $color-gray-4 30%,
+  $color-gray-4 80%,
+  $color-gray-6 100%
+);
 
-$os-gradient--theme: $os-gradient--silver;
+
+$os-gradient--theme:          $os-gradient--silver;
+$os-gradient--theme-light:    $os-gradient--silver-light;
+$os-gradient--theme-dark:     $os-gradient--silver-dark;
+$os-gradient--theme-reverse:  $os-gradient--silver-reverse;
 
 // Shadows
 $os-shadow-l: 0 8px 24px $color--shadow;

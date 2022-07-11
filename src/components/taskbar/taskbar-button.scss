@@ -1,35 +1,15 @@
 @import '~/src/style/index';
 @import '~/src/style/theme';
 
-$border-style-button: 2px outset $color-blue-4;
-$border-style-button--active: 2px outset $color-blue-6;
-$border-style-button--pressed: 2px inset $color-blue-4;
-$box-shadow-focus: 0 0 0 2px $color-orange-4;
+// $border-color:         $color-blue-4;
+// $border-color--active: $color-blue-6;
+$border-color:         $color-gray-4;
+$border-color--active: $color-gray-6;
 
-$gradient: linear-gradient(
-  to bottom,
-  $color-blue-3 0%,
-  $color-blue-5 10%,
-  $color-blue-4 30%,
-  $color-blue-4 80%,
-  $color-blue-6 100%
-);
-$gradient-reverse: linear-gradient(
-  to top,
-  $color-blue-3 0%,
-  $color-blue-5 10%,
-  $color-blue-4 30%,
-  $color-blue-4 80%,
-  $color-blue-6 100%
-);
-$gradient-dark: linear-gradient(
-  to bottom,
-  $color-blue-6 0%,
-  $color-blue-7 10%,
-  $color-blue-7 30%,
-  $color-blue-7 80%,
-  $color-blue-8 100%
-);
+$border-style-button: 2px outset $border-color;
+$border-style-button--active: 2px outset $border-color--active;
+$border-style-button--pressed: 2px inset $border-color;
+$box-shadow-focus: 0 0 0 2px $color-orange-4;
 
 .taskbar-button {
   position: relative;
@@ -37,7 +17,7 @@ $gradient-dark: linear-gradient(
   padding: $space-inset-stretch-s;
   border: $border-style-button;
   border-radius: $border-radius-m;
-  background: $gradient;
+  background: $os-gradient--theme-light;
 
   cursor: pointer;
   font-family: inherit;
@@ -62,12 +42,12 @@ $gradient-dark: linear-gradient(
 
 .taskbar-button--active {
   border: $border-style-button--active;
-  background: $gradient-dark;
+  background: $os-gradient--theme-dark;
 }
 
 .taskbar-button:active:not([disabled]) {
   border: $border-style-button--pressed !important;
-  background: $gradient-reverse !important;
+  background: $os-gradient--theme-reverse !important;
 }
 
 .taskbar-button[disabled] {
