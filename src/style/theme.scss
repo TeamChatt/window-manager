@@ -2,14 +2,13 @@
 $os-color-warm-gray-0: #f5eee5;
 $os-color-dark-blue-0: #1e00ff;
 
-$os-color--border-standard:      $color-indigo-2;
-
 $os-color--border-blue:          $color-blue-5;
 $os-color--border-blue--fade:    $color-blue-3;
 
 $os-color--border-silver:        $color-gray-5;
 $os-color--border-silver--fade:  $color-gray-3;
 
+$os-color--border-standard:      $color-indigo-2;
 $os-color--border-window:        var(--os-color--border-window, $os-color--border-blue);
 $os-color--border-window--fade:  var(--os-color--border-window--fade, $os-color--border-blue--fade);
 
@@ -100,6 +99,27 @@ $os-shadow-l: 0 8px 24px $color--shadow;
 // Sizes
 $os-space-inset-squash-xs: 6px 3px;
 
+// Theming
+@mixin use-blue-theme() {
+  --os-gradient--theme: #{$os-gradient--blue};
+  --os-gradient--theme-light: #{$os-gradient--blue-light};
+  --os-gradient--theme-dark: #{$os-gradient--blue-dark};
+  --os-gradient--theme-reverse: #{$os-gradient--blue-reverse};
+
+  --os-color--border-window: #{$os-color--border-blue};
+  --os-color--border-window--fade: #{$os-color--border-blue--fade};
+}
+@mixin use-silver-theme() {
+  --os-gradient--theme: #{$os-gradient--silver};
+  --os-gradient--theme-light: #{$os-gradient--silver-light};
+  --os-gradient--theme-dark: #{$os-gradient--silver-dark};
+  --os-gradient--theme-reverse: #{$os-gradient--silver-reverse};
+
+  --os-color--border-window: #{$os-color--border-silver};
+  --os-color--border-window--fade: #{$os-color--border-silver--fade};
+}
+
+// Scrollbar
 @mixin os-scrollable() {
   $color--scrollbar-track: $color-white;
   $color--scrollbar-thumb: $color-indigo-1;
