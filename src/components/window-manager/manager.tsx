@@ -22,6 +22,7 @@ export const useWindowContext = () => useContext(WindowContext)
 type WindowManagerProps = {
   background: string
   backgroundPosition?: string
+  themeColor: 'blue' | 'silver'
   windows: WindowProps[]
   desktopItems: ReactNode
   taskbarExtras?: ReactNode
@@ -29,6 +30,7 @@ type WindowManagerProps = {
 export const WindowManager = ({
   background,
   backgroundPosition,
+  themeColor,
   windows,
   desktopItems,
   taskbarExtras,
@@ -78,6 +80,7 @@ export const WindowManager = ({
           <Manager
             background={background}
             backgroundPosition={backgroundPosition}
+            themeColor={themeColor}
             desktopItems={desktopItems}
             windowItems={windowItems}
             taskbarItems={taskbarItems}

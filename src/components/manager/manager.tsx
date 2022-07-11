@@ -11,6 +11,7 @@ const cx = classnames.bind(styles)
 type ManagerProps = {
   background: string
   backgroundPosition?: string
+  themeColor: 'blue' | 'silver'
   windowItems: ReactNode
   desktopItems: ReactNode
   taskbarItems: ReactNode
@@ -19,13 +20,14 @@ type ManagerProps = {
 export const Manager = ({
   background,
   backgroundPosition,
+  themeColor,
   windowItems,
   desktopItems,
   taskbarItems,
   taskbarExtras,
 }: ManagerProps) => {
   return (
-    <div className={cx('window-manager')}>
+    <div className={cx('window-manager')} data-theme-color={themeColor}>
       <div className={cx('window-manager_layer-group')}>
         <div className={cx('window-manager_layer')}>
           <Desktop

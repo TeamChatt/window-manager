@@ -213,6 +213,7 @@ export const ExampleApp = () => {
     <WindowManager
       background={background}
       backgroundPosition={'bottom left'}
+      themeColor="silver"
       desktopItems={desktopItems}
       windows={windows}
     />
